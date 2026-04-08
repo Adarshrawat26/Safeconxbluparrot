@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>About Us | Safecon Blu Parrot</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--bg: #f6f2ea;
+			--ink: #111318;
+			--muted: #5c5a54;
+			--line: rgba(17, 19, 24, 0.12);
+			--accent: #5f6df2;
+			--soft: #f0ebe1;
+			--dark: #08090c;
+			--radius: 20px;
+			--shadow: 0 20px 55px rgba(17, 19, 24, 0.08);
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body {
+			margin: 0;
+			font-family: "Manrope", sans-serif;
+			color: var(--ink);
+			background: var(--bg);
+			overflow-x: hidden;
+		}
+		a { color: inherit; text-decoration: none; }
+		img { max-width: 100%; display: block; }
+		.page { width: min(1200px, calc(100% - 40px)); margin: 0 auto; }
+
+		.topbar {
+			position: sticky;
+			top: 0;
+			z-index: 30;
+			background: rgba(8, 8, 12, 0.9);
+			backdrop-filter: blur(16px);
+			border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		}
+		.topbar-inner {
+			width: min(1240px, calc(100% - 32px));
+			margin: 0 auto;
+			min-height: 64px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 18px;
+			color: rgba(255, 255, 255, 0.88);
+		}
+		.brand {
+			font-size: 0.9rem;
+			font-weight: 800;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+		}
+		.nav { display: flex; align-items: center; gap: 26px; }
+		.nav a {
+			font-size: 0.86rem;
+			opacity: 0.7;
+			transition: opacity 140ms;
+		}
+		.nav a:hover,
+		.nav a.active { opacity: 1; }
+		.btn {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 999px;
+			padding: 0.65rem 1.2rem;
+			font-size: 0.86rem;
+			font-weight: 700;
+			border: 1px solid transparent;
+			transition: transform 160ms ease;
+			white-space: nowrap;
+		}
+		.btn:hover { transform: translateY(-2px); }
+		.btn-primary {
+			background: linear-gradient(135deg, #7980f5, #5864ef);
+			color: white;
+			box-shadow: 0 10px 28px rgba(88, 100, 239, 0.3);
+		}
+		.btn-dark {
+			background: #0c0c10;
+			color: white;
+			border-color: rgba(255, 255, 255, 0.12);
+		}
+
+		.hero {
+			background: radial-gradient(circle at 78% 30%, rgba(95, 109, 242, 0.18), transparent 40%),
+				linear-gradient(160deg, #06070a 0%, #0a0b12 100%);
+			padding: 88px 0 42px;
+			color: white;
+			border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+		}
+		.hero-grid {
+			display: grid;
+			grid-template-columns: 1.1fr 0.9fr;
+			gap: 42px;
+			align-items: end;
+		}
+		.eyebrow {
+			font-size: 0.68rem;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.18em;
+			color: rgba(255, 255, 255, 0.34);
+			margin: 0 0 16px;
+		}
+		h1 {
+			font-family: "Cormorant Garamond", serif;
+			font-size: clamp(2.5rem, 5.4vw, 4.9rem);
+			line-height: 0.95;
+			letter-spacing: -0.03em;
+			margin: 0 0 16px;
+		}
+		.hero p {
+			font-size: 0.98rem;
+			line-height: 1.84;
+			color: rgba(255, 255, 255, 0.58);
+			max-width: 62ch;
+			margin: 0;
+		}
+		.hero-actions {
+			display: flex;
+			gap: 10px;
+			flex-wrap: wrap;
+			margin-top: 28px;
+		}
+		.hero-aside {
+			padding: 24px;
+			border-radius: 18px;
+			border: 1px solid rgba(255, 255, 255, 0.12);
+			background: rgba(255, 255, 255, 0.05);
+		}
+		.hero-aside p {
+			margin: 0;
+			font-size: 0.86rem;
+			line-height: 1.72;
+			color: rgba(255, 255, 255, 0.55);
+		}
+
+		.section { padding: 76px 0; }
+		.section.soft { background: var(--soft); }
+		.section.dark {
+			background: #07080c;
+			color: #f5f2eb;
+		}
+		.label {
+			font-size: 0.68rem;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.18em;
+			color: var(--muted);
+			margin-bottom: 10px;
+		}
+		.dark .label { color: rgba(255, 255, 255, 0.34); }
+		.section h2 {
+			font-family: "Cormorant Garamond", serif;
+			font-size: clamp(1.95rem, 3.8vw, 3.3rem);
+			line-height: 0.99;
+			letter-spacing: -0.03em;
+			margin: 0 0 14px;
+		}
+		.lead {
+			font-size: 0.96rem;
+			line-height: 1.8;
+			color: var(--muted);
+			max-width: 62ch;
+			margin: 0 0 34px;
+		}
+		.dark .lead { color: rgba(255, 255, 255, 0.55); }
+
+		.split-2 {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 16px;
+		}
+		.card {
+			background: white;
+			border: 1px solid var(--line);
+			border-radius: var(--radius);
+			padding: 26px;
+			box-shadow: var(--shadow);
+		}
+		.card h3 {
+			font-size: 1.02rem;
+			margin: 0 0 10px;
+		}
+		.card p {
+			font-size: 0.9rem;
+			line-height: 1.74;
+			color: var(--muted);
+			margin: 0;
+		}
+		.logo-row {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			margin-bottom: 14px;
+		}
+		.logo-row img {
+			height: 28px;
+			width: auto;
+			object-fit: contain;
+		}
+
+		.execution-box {
+			border-radius: var(--radius);
+			padding: 28px;
+			border: 1px solid var(--line);
+			background: white;
+		}
+		.execution-box p {
+			font-size: 0.92rem;
+			line-height: 1.8;
+			color: var(--muted);
+			margin: 0 0 12px;
+		}
+		.execution-note {
+			font-size: 0.81rem;
+			letter-spacing: 0.02em;
+			color: #7b776e;
+			background: #f7f3eb;
+			border: 1px dashed rgba(17, 19, 24, 0.2);
+			border-radius: 12px;
+			padding: 12px 14px;
+		}
+
+		.metrics {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 12px;
+		}
+		.metric {
+			padding: 22px 18px;
+			border-radius: 16px;
+			border: 1px solid rgba(255, 255, 255, 0.12);
+			background: rgba(255, 255, 255, 0.04);
+		}
+		.metric strong {
+			display: block;
+			font-size: 2rem;
+			letter-spacing: -0.03em;
+			line-height: 1;
+			margin-bottom: 6px;
+		}
+		.metric span {
+			font-size: 0.76rem;
+			text-transform: uppercase;
+			letter-spacing: 0.12em;
+			color: rgba(255, 255, 255, 0.5);
+		}
+
+		.diff-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 14px;
+		}
+		.diff-item {
+			padding: 20px;
+			background: rgba(255, 255, 255, 0.04);
+			border: 1px solid rgba(255, 255, 255, 0.11);
+			border-radius: 16px;
+		}
+		.diff-item h3 {
+			margin: 0 0 8px;
+			font-size: 0.92rem;
+			letter-spacing: 0.04em;
+			text-transform: uppercase;
+			color: rgba(255, 255, 255, 0.84);
+		}
+		.diff-item p {
+			margin: 0;
+			font-size: 0.88rem;
+			line-height: 1.7;
+			color: rgba(255, 255, 255, 0.58);
+		}
+
+		.list {
+			margin: 12px 0 0;
+			padding: 0;
+			list-style: none;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
+		.list li {
+			padding-left: 16px;
+			position: relative;
+			font-size: 0.89rem;
+			line-height: 1.7;
+			color: var(--muted);
+		}
+		.list li::before {
+			content: "->";
+			position: absolute;
+			left: 0;
+			color: var(--accent);
+			font-size: 0.76rem;
+			font-weight: 700;
+			top: 2px;
+		}
+		.tag {
+			display: inline-flex;
+			font-size: 0.68rem;
+			text-transform: uppercase;
+			letter-spacing: 0.12em;
+			padding: 6px 10px;
+			border-radius: 999px;
+			border: 1px solid rgba(17, 19, 24, 0.2);
+			color: #57534b;
+			margin-top: 14px;
+		}
+
+		.timeline {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 12px;
+		}
+		.t-item {
+			padding: 20px;
+			border-radius: 14px;
+			border: 1px solid var(--line);
+			background: white;
+		}
+		.t-item strong {
+			display: block;
+			font-size: 0.86rem;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: #3a3f9b;
+			margin-bottom: 8px;
+		}
+		.t-item h4 {
+			font-size: 0.95rem;
+			margin: 0 0 8px;
+		}
+		.t-item p {
+			font-size: 0.85rem;
+			line-height: 1.64;
+			color: var(--muted);
+			margin: 0;
+		}
+
+		.trust-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 14px;
+		}
+		.trust-card {
+			padding: 22px;
+			border-radius: 16px;
+			border: 1px solid var(--line);
+			background: white;
+		}
+		.trust-card h3 {
+			margin: 0 0 8px;
+			font-size: 1rem;
+		}
+		.trust-card p {
+			margin: 0;
+			font-size: 0.9rem;
+			line-height: 1.76;
+			color: var(--muted);
+		}
+
+		.cta-wrap {
+			padding: 52px;
+			text-align: center;
+			border-radius: 28px;
+			background: linear-gradient(145deg, #060710, #0d1020);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+		}
+		.cta-wrap h2 { color: #fff; margin-bottom: 12px; }
+		.cta-wrap p {
+			font-size: 0.96rem;
+			line-height: 1.8;
+			color: rgba(255, 255, 255, 0.56);
+			max-width: 56ch;
+			margin: 0 auto 28px;
+		}
+		.cta-actions {
+			display: flex;
+			justify-content: center;
+			gap: 10px;
+			flex-wrap: wrap;
+		}
+
+		.site-footer {
+			padding: 32px 0 20px;
+			background: #070707;
+			color: rgba(255, 255, 255, 0.9);
+			border-top: 1px solid rgba(255, 255, 255, 0.07);
+		}
+		.footer-bottom {
+			display: flex;
+			gap: 16px;
+			justify-content: space-between;
+			padding-top: 14px;
+			border-top: 1px solid rgba(255, 255, 255, 0.1);
+			color: rgba(255, 255, 255, 0.4);
+			font-size: 0.82rem;
+			flex-wrap: wrap;
+		}
+
+		.fade-up { animation: fadeUp 800ms ease both; }
+		.d1 { animation-delay: 120ms; }
+		.d2 { animation-delay: 240ms; }
+		@keyframes fadeUp {
+			from { opacity: 0; transform: translateY(16px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+
+		@media (max-width: 1024px) {
+			.hero-grid,
+			.split-2,
+			.metrics,
+			.diff-grid,
+			.timeline,
+			.trust-grid {
+				grid-template-columns: 1fr 1fr;
+			}
+		}
+		@media (max-width: 720px) {
+			.topbar-inner { flex-direction: column; align-items: flex-start; padding: 10px 0; }
+			.hero-grid,
+			.split-2,
+			.metrics,
+			.diff-grid,
+			.timeline,
+			.trust-grid {
+				grid-template-columns: 1fr;
+			}
+			.cta-wrap { padding: 36px 22px; }
+		}
+	</style>
+</head>
+<body>
+
+<header class="topbar">
+	<div class="topbar-inner">
+		<a class="brand" href="index.html">Bluparrot x Safecon</a>
+		<nav class="nav">
+			<a href="#" class="active">About us</a>
+			<a href="capabilities.html">Capabilities</a>
+			<a href="leadership.html">Leadership</a>
+			<a href="israel-desk.html">Israel Desk</a>
+			<a href="atmanirbhar.html">Atmanirbhar Bharat</a>
+		</nav>
+		<a class="btn btn-primary" href="contact.html">Partner with us</a>
+	</div>
+</header>
+
+<main>
+	<section class="hero">
+		<div class="page hero-grid">
+			<div>
+				<p class="eyebrow fade-up">About Us</p>
+				<h1 class="fade-up d1">Safecon Blu Parrot.<br>Built for defence execution.</h1>
+				<p class="fade-up d1">For over 25 years, Safecon Blu Parrot has supported aerospace and defence customers with manufacturing, S&amp;T, systems integration, AI, and programme management. Our work spans SCA 2.2.2-style programmes, SDR integration, and data-driven intelligence with engineering depth, integration discipline, and programme governance suited to long-cycle defence contracts.</p>
+				<div class="hero-actions fade-up d2">
+					<a class="btn btn-primary" href="#deliver">Core Capabilities</a>
+					<a class="btn btn-dark" href="#action">Partner With Us</a>
+				</div>
+			</div>
+			<div class="hero-aside fade-up d2">
+				<p>Manufacturing, AI, programme governance, and indigenisation delivered in one operating chain for mission-critical defence outcomes.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="section" id="who">
+		<div class="page">
+			<div class="label">01 - Who we are</div>
+			<h2>About Us</h2>
+			<p class="lead">Safecon Blu Parrot brings together two complementary organisations with one shared execution model.</p>
+			<div class="split-2">
+				<article class="card fade-up">
+					<div class="logo-row">
+						<img src="safecon-logo.png" alt="Safecon" />
+					</div>
+					<h3>Safecon Technologies - Revolutionizing Innovation</h3>
+					<p>Indigenisation, defence manufacturing, certifications, programme execution, and on-programme support.</p>
+				</article>
+				<article class="card fade-up d1">
+					<div class="logo-row">
+						<img src="blu-parrot-logo.png" alt="Blu Parrot" />
+					</div>
+					<h3>Blu Parrot Ventures</h3>
+					<p>AI, data science, and decision-support systems for defence and intelligence use cases.</p>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<section class="section soft" id="deliver">
+		<div class="page">
+			<div class="label">02 - What we deliver</div>
+			<h2>End-to-end programme delivery</h2>
+			<p class="lead">Together, we deliver end-to-end defence solutions from design and manufacturing to indigenisation, integration, deployment, and lifecycle support.</p>
+		</div>
+	</section>
+
+	<section class="section" id="work">
+		<div class="page">
+			<div class="label">03 - How we work</div>
+			<h2>Execution</h2>
+			<div class="execution-box">
+				<p><strong>Manufacturing and production, held to programme discipline.</strong></p>
+				<p>Our teams spend their time on shop floors, integration bays, and test cells, not only in conference rooms. That shapes how we quote, stage FAT, and support field deployment.</p>
+				<div class="execution-note">Imagery is representative of industrial defence supply chains; customer sites and classified programmes are not shown on the public web.</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section dark" id="proof">
+		<div class="page">
+			<div class="label">04 - Proof</div>
+			<h2>Operational track record</h2>
+			<div class="metrics fade-up d1">
+				<div class="metric"><strong>25+</strong><span>Years of Experience</span></div>
+				<div class="metric"><strong>100+</strong><span>Defence Programs</span></div>
+				<div class="metric"><strong>25+</strong><span>Countries</span></div>
+				<div class="metric"><strong>100%</strong><span>Atmanirbhar Focused</span></div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section dark" id="why">
+		<div class="page">
+			<div class="label">05 - Why us</div>
+			<h2>Differentiators</h2>
+			<p class="lead">What sets our alliance apart for aerospace, defence, and national security programmes.</p>
+			<div class="diff-grid fade-up d1">
+				<div class="diff-item">
+					<h3>Capability</h3>
+					<p>Manufacturing, indigenisation, design, AI, and programme delivery in one team. Indigenisation and self-reliance are core to how we scope work.</p>
+				</div>
+				<div class="diff-item">
+					<h3>Strategy</h3>
+					<p>Track record across build, integration, and through-life support for long-horizon defence programmes.</p>
+				</div>
+				<div class="diff-item" style="grid-column: span 2;">
+					<h3>Execution</h3>
+					<p>Onsite and offshore engagement matched to security and programme needs. We stay on long-horizon defence programmes, not one-off vendor tickets.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section soft" id="offer">
+		<div class="page">
+			<div class="label">06 - What we offer</div>
+			<h2>Make in India and global execution support</h2>
+			<div class="split-2">
+				<article class="card fade-up">
+					<h3>Indigenisation (Make in India)</h3>
+					<p>We actively drive indigenous defence capabilities through:</p>
+					<ul class="list">
+						<li>Local manufacturing of critical components</li>
+						<li>Technology transfer and localization</li>
+						<li>Reduced dependency on imports</li>
+						<li>Alignment with Government of India defence initiatives</li>
+					</ul>
+					<span class="tag">Atmanirbhar Bharat</span>
+				</article>
+				<article class="card fade-up d1">
+					<h3>Global Supply Chain and Locations</h3>
+					<ul class="list" style="margin-top: 0;">
+						<li>Strong global supplier network (OEMs and partners)</li>
+						<li>Access to critical industrial materials and components</li>
+						<li>Presence across multiple global locations</li>
+						<li>Ability to support both domestic and international defence programs</li>
+					</ul>
+					<span class="tag">Partnerships desk</span>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<section class="section" id="journey">
+		<div class="page">
+			<div class="label">07 - Credibility</div>
+			<h2>Our Journey</h2>
+			<div class="timeline fade-up d1">
+				<article class="t-item">
+					<strong>1999</strong>
+					<h4>Safecon Founded</h4>
+					<p>Defence manufacturing and indigenisation focus.</p>
+				</article>
+				<article class="t-item">
+					<strong>2010s</strong>
+					<h4>Expansion and Expertise</h4>
+					<p>Naval systems, SDR integration, and strategic programs.</p>
+				</article>
+				<article class="t-item">
+					<strong>2020</strong>
+					<h4>Blu Parrot AI</h4>
+					<p>Advanced AI and data science for defence intelligence.</p>
+				</article>
+				<article class="t-item">
+					<strong>Today</strong>
+					<h4>Safecon Blu Parrot</h4>
+					<p>Unified manufacturing, AI, integration, and execution.</p>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<section class="section" id="trust">
+		<div class="page">
+			<div class="label">08 - Trust</div>
+			<h2>Mission, Vision, Commitment</h2>
+			<div class="trust-grid fade-up d1">
+				<div class="trust-card">
+					<h3>Mission</h3>
+					<p>Ship integrated defence outcomes: hardware, software, and programme discipline in one chain of responsibility.</p>
+				</div>
+				<div class="trust-card">
+					<h3>Vision</h3>
+					<p>Be a trusted partner for complex defence programmes through indigenous innovation and global-grade quality.</p>
+				</div>
+				<div class="trust-card">
+					<h3>Commitment</h3>
+					<p>Indigenisation, compliance rigor, and lifecycle support aligned with national security priorities.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="section" id="action">
+		<div class="page">
+			<div class="label">09 - Action</div>
+			<div class="cta-wrap fade-up">
+				<h2>Explore our capabilities</h2>
+				<p>From manufacturing and integration to AI for defence and global supply chain, we support your programme end to end.</p>
+				<div class="cta-actions">
+					<a class="btn btn-primary" href="capabilities.html">View Capabilities</a>
+					<a class="btn btn-dark" href="leadership.html">Leadership</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
+
+<footer class="site-footer">
+	<div class="page" style="padding-bottom:20px; color:rgba(255,255,255,0.65); font-size:0.92rem;">
+		<div class="brand" style="color:rgba(255,255,255,0.9); margin-bottom:8px;">Bluparrot x Safecon</div>
+		Integrated defence capabilities powered by AI, engineering, and execution.
+	</div>
+	<div class="page footer-bottom">
+		<span>© 2026 Safecon Blu Parrot. All rights reserved.</span>
+		<span>Privacy Policy</span>
+		<span>Terms of Service</span>
+	</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Israel Desk | Safecon Blu Parrot</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--bg: #f4f1ea;
+			--ink: #0f1115;
+			--muted: #5e5c56;
+			--line: rgba(15,17,21,0.13);
+			--accent: #6d72f5;
+			--dark: #060606;
+			--shadow: 0 20px 60px rgba(15,17,21,0.09);
+			--radius: 20px;
+			--blue: #0038b8;
+			--il-blue: #1a3a8f;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body { margin: 0; font-family: "Manrope", sans-serif; color: var(--ink); background: #f8f5ef; overflow-x: hidden; }
+		a { color: inherit; text-decoration: none; }
+		img { max-width: 100%; display: block; }
+		.page { width: min(1200px, calc(100% - 40px)); margin: 0 auto; }
+
+		/* ── Nav ── */
+		.topbar { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(18px); background: rgba(8,8,10,0.9); border-bottom: 1px solid rgba(255,255,255,0.07); }
+		.topbar-inner { width: min(1240px, calc(100% - 32px)); margin: 0 auto; min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 18px; color: rgba(255,255,255,0.88); }
+		.brand { font-size: 0.9rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+		.nav { display: flex; align-items: center; gap: 26px; }
+		.nav a { font-size: 0.86rem; opacity: 0.7; transition: opacity 140ms; }
+		.nav a:hover, .nav a.active { opacity: 1; }
+		.btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 0.65rem 1.2rem; font-size: 0.86rem; font-weight: 700; border: 1px solid transparent; transition: transform 160ms ease; white-space: nowrap; cursor: pointer; }
+		.btn:hover { transform: translateY(-2px); }
+		.btn-primary { background: linear-gradient(135deg,#7a7ff5,#5864ef); color: white; box-shadow: 0 10px 28px rgba(88,100,239,0.28); }
+		.btn-dark { background: #0c0c0d; color: white; border-color: rgba(255,255,255,0.1); }
+		.btn-white { background: white; color: var(--ink); }
+		.btn-outline { background: transparent; color: var(--ink); border-color: var(--line); }
+
+		/* ── Hero ── */
+		.hero {
+			background: linear-gradient(160deg, #05050a 0%, #08091a 60%, #050510 100%);
+			padding: 96px 0 0;
+			color: white;
+			overflow: hidden;
+			position: relative;
+		}
+
+		/* subtle flag stripe accent */
+		.hero::before {
+			content: "";
+			position: absolute;
+			top: 0; right: 0;
+			width: 420px; height: 100%;
+			background:
+				linear-gradient(180deg,
+					transparent 0 18%,
+					rgba(0,56,184,0.12) 18% 35%,
+					transparent 35% 65%,
+					rgba(0,56,184,0.12) 65% 82%,
+					transparent 82% 100%);
+			pointer-events: none;
+		}
+
+		.hero-grid {
+			display: grid;
+			grid-template-columns: 1.1fr 0.9fr;
+			gap: 56px;
+			align-items: end;
+			padding-bottom: 72px;
+		}
+
+		.hero-eyebrow {
+			display: flex; align-items: center; gap: 10px;
+			font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+			letter-spacing: 0.2em; color: rgba(255,255,255,0.32); margin-bottom: 20px;
+		}
+
+		.flag-mini {
+			display: inline-flex; flex-direction: column;
+			width: 24px; border-radius: 3px; overflow: hidden; gap: 0;
+		}
+
+		.flag-mini span { display: block; height: 3px; }
+		.flag-mini span:nth-child(1) { background: #fff; }
+		.flag-mini span:nth-child(2) { background: var(--il-blue); height: 5px; }
+		.flag-mini span:nth-child(3) { background: #fff; }
+		.flag-mini span:nth-child(4) { background: var(--il-blue); height: 5px; }
+		.flag-mini span:nth-child(5) { background: #fff; }
+
+		.hero h1 {
+			font-family: "Cormorant Garamond", serif;
+			font-size: clamp(3rem, 6.5vw, 5.8rem);
+			line-height: 0.94; letter-spacing: -0.03em; margin: 0 0 24px;
+		}
+
+		.hero h1 em {
+			font-style: normal;
+			background: linear-gradient(135deg, #a0a8f8, #6d72f5);
+			-webkit-background-clip: text; -webkit-text-fill-color: transparent;
+			background-clip: text;
+		}
+
+		.hero-sub {
+			color: rgba(255,255,255,0.52); font-size: 1rem;
+			line-height: 1.82; margin: 0 0 30px; max-width: 50ch;
+		}
+
+		.hero-right {
+			display: flex; flex-direction: column; justify-content: flex-end; gap: 16px;
+		}
+
+		.heritage-pill {
+			background: rgba(255,255,255,0.05);
+			border: 1px solid rgba(255,255,255,0.1);
+			border-radius: 16px;
+			padding: 20px 22px;
+		}
+
+		.heritage-pill p {
+			font-size: 0.85rem; color: rgba(255,255,255,0.45);
+			line-height: 1.7; margin: 0;
+		}
+
+		.stat-pair {
+			display: flex; gap: 28px;
+		}
+
+		.stat-item strong {
+			display: block;
+			font-size: 2.4rem; font-weight: 400; letter-spacing: -0.04em;
+			line-height: 1; color: white;
+		}
+
+		.stat-item span {
+			font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+			color: rgba(255,255,255,0.38); margin-top: 4px; display: block;
+		}
+
+		/* ── Corridor bar ── */
+		.corridor-bar {
+			background: rgba(255,255,255,0.04);
+			border-top: 1px solid rgba(255,255,255,0.08);
+			padding: 18px 0;
+		}
+
+		.corridor-inner {
+			display: flex; align-items: center; gap: 0; overflow: hidden;
+		}
+
+		.corridor-item {
+			display: flex; align-items: center; gap: 8px;
+			padding: 0 24px 0 0; margin-right: 24px;
+			border-right: 1px solid rgba(255,255,255,0.08);
+			font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+			letter-spacing: 0.12em; color: rgba(255,255,255,0.35);
+		}
+
+		.corridor-item:last-child { border-right: none; }
+
+		.ci-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--il-blue); flex-shrink: 0; }
+		.ci-dot.gold { background: #c8a83a; }
+		.ci-dot.green { background: #2aaa4f; }
+
+		/* ── Section base ── */
+		.section { padding: 76px 0; }
+		.section.dark { background: #070709; color: #f5f1e8; }
+		.section.soft { background: #f0ece3; }
+		.section-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--muted); margin-bottom: 10px; }
+		.dark .section-label { color: rgba(255,255,255,0.28); }
+		.section-title { font-family: "Cormorant Garamond", serif; font-size: clamp(2rem, 3.8vw, 3.4rem); line-height: 0.97; letter-spacing: -0.03em; margin: 0 0 14px; }
+		.section-lead { color: var(--muted); font-size: 0.97rem; line-height: 1.82; margin: 0 0 44px; max-width: 60ch; }
+		.dark .section-lead { color: rgba(255,255,255,0.5); }
+
+		/* ── Programme discipline ── */
+		.discipline-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 2px;
+			background: var(--line);
+			border: 1px solid var(--line);
+			border-radius: 24px;
+			overflow: hidden;
+		}
+
+		.disc-card { background: white; padding: 36px 32px; }
+		.disc-card.accent-card { background: #0a0a12; color: white; }
+
+		.disc-card h3 { font-size: 1.1rem; font-weight: 700; margin: 0 0 12px; line-height: 1.25; }
+		.disc-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.75; margin: 0; }
+		.accent-card p { color: rgba(255,255,255,0.5); }
+		.accent-card h3 { color: white; }
+
+		.disc-tag {
+			display: inline-flex; align-items: center; gap: 7px;
+			font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+			text-transform: uppercase; padding: 5px 12px; border-radius: 999px;
+			border: 1px solid rgba(255,255,255,0.12);
+			color: rgba(255,255,255,0.5); margin-bottom: 20px;
+		}
+
+		.disc-tag::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: #6d72f5; flex-shrink: 0; }
+
+		/* ── Heritage visual ── */
+		.heritage-row {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 32px;
+			align-items: center;
+		}
+
+		.heritage-visual {
+			border-radius: 24px;
+			overflow: hidden;
+			min-height: 380px;
+			position: relative;
+			background:
+				linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.42)),
+				url("israel-flag.jpg") center center / cover no-repeat;
+		}
+
+		.heritage-visual::before {
+			content: "";
+			position: absolute; inset: 0;
+			background: linear-gradient(135deg, rgba(12,20,58,0.16), rgba(12,20,58,0.04));
+		}
+
+		.heritage-visual-label {
+			position: absolute; bottom: 16px; left: 16px; right: 16px;
+			font-size: 0.68rem; color: rgba(255,255,255,0.38);
+			line-height: 1.5; font-style: italic;
+		}
+
+		/* ── What We Enable ── */
+		.enable-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 16px;
+			margin-top: 36px;
+		}
+
+		.enable-card {
+			border-radius: var(--radius);
+			border: 1px solid var(--line);
+			padding: 30px 28px;
+			background: white;
+			transition: box-shadow 200ms ease;
+		}
+
+		.enable-card:hover { box-shadow: var(--shadow); }
+
+		.enable-icon {
+			width: 40px; height: 40px; border-radius: 12px;
+			display: grid; place-items: center; font-size: 1.1rem;
+			margin-bottom: 18px;
+			background: rgba(109,114,245,0.1);
+		}
+
+		.enable-card h3 { font-size: 1.05rem; font-weight: 700; margin: 0 0 10px; }
+		.enable-card p { font-size: 0.87rem; color: var(--muted); line-height: 1.72; margin: 0; }
+
+		/* ── Verticals ── */
+		.verticals-grid {
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+			gap: 12px;
+			margin-top: 36px;
+		}
+
+		.vertical-tile {
+			border-radius: var(--radius);
+			border: 1px solid rgba(255,255,255,0.08);
+			background: rgba(255,255,255,0.04);
+			padding: 24px 20px;
+			display: flex; flex-direction: column; gap: 10px;
+		}
+
+		.vertical-tile h4 {
+			font-size: 0.95rem; font-weight: 700; color: white;
+			margin: 0; line-height: 1.3;
+		}
+
+		.vertical-tile p {
+			font-size: 0.78rem; color: rgba(255,255,255,0.4);
+			margin: 0; line-height: 1.5;
+		}
+
+		.vertical-num {
+			font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em;
+			color: rgba(109,114,245,0.6); text-transform: uppercase;
+		}
+
+		/* ── Strategic Advantage ── */
+		.advantage-row {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 32px;
+			align-items: center;
+		}
+
+		.advantage-points {
+			display: flex; flex-direction: column; gap: 0;
+			border: 1px solid var(--line); border-radius: var(--radius);
+			overflow: hidden;
+		}
+
+		.advantage-point {
+			padding: 22px 26px;
+			border-bottom: 1px solid var(--line);
+			display: flex; align-items: center; gap: 16px;
+			background: white;
+		}
+
+		.advantage-point:last-child { border-bottom: none; }
+
+		.adv-icon {
+			width: 36px; height: 36px; border-radius: 10px;
+			display: grid; place-items: center; font-size: 1rem;
+			background: rgba(109,114,245,0.1); flex-shrink: 0;
+		}
+
+		.advantage-point h4 { font-size: 0.95rem; font-weight: 700; margin: 0 0 4px; }
+		.advantage-point p { font-size: 0.84rem; color: var(--muted); margin: 0; line-height: 1.5; }
+
+		/* ── CTA ── */
+		.cta-block {
+			background: linear-gradient(135deg, #06060e 0%, #0c0c1e 100%);
+			border-radius: 28px;
+			padding: 64px 56px;
+			text-align: center;
+			position: relative;
+			overflow: hidden;
+			border: 1px solid rgba(255,255,255,0.07);
+		}
+
+		.cta-block::before {
+			content: "";
+			position: absolute; inset: 0;
+			background:
+				radial-gradient(circle at 20% 50%, rgba(109,114,245,0.14), transparent 40%),
+				radial-gradient(circle at 80% 50%, rgba(0,56,184,0.14), transparent 40%);
+			pointer-events: none;
+		}
+
+		.cta-block .section-label { color: rgba(255,255,255,0.28); margin-bottom: 14px; }
+
+		.cta-block h2 {
+			font-family: "Cormorant Garamond", serif;
+			font-size: clamp(2rem, 4vw, 3.6rem);
+			letter-spacing: -0.03em; line-height: 1.05;
+			color: white; margin: 0 0 16px;
+			position: relative;
+		}
+
+		.cta-block p {
+			color: rgba(255,255,255,0.48); font-size: 0.97rem;
+			line-height: 1.8; max-width: 52ch; margin: 0 auto 32px;
+			position: relative;
+		}
+
+		.cta-block .actions {
+			display: flex; gap: 12px; justify-content: center;
+			flex-wrap: wrap; position: relative;
+		}
+
+		/* ── Footer ── */
+		.site-footer { padding: 32px 0 20px; background: #070707; color: rgba(255,255,255,0.9); border-top: 1px solid rgba(255,255,255,0.07); }
+		.footer-bottom { display: flex; gap: 16px; justify-content: space-between; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); font-size: 0.82rem; flex-wrap: wrap; }
+
+		/* ── Fade ── */
+		.fade-up { animation: fadeUp 800ms ease both; }
+		.d1 { animation-delay: 100ms; } .d2 { animation-delay: 200ms; } .d3 { animation-delay: 300ms; }
+		@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+		/* ── Responsive ── */
+		@media (max-width: 1000px) {
+			.hero-grid, .discipline-grid, .heritage-row, .advantage-row { grid-template-columns: 1fr; }
+			.verticals-grid { grid-template-columns: repeat(2, 1fr); }
+			.enable-grid { grid-template-columns: 1fr; }
+		}
+		@media (max-width: 640px) {
+			.topbar-inner { flex-direction: column; align-items: flex-start; padding: 10px 0; }
+			.verticals-grid { grid-template-columns: 1fr 1fr; }
+			.cta-block { padding: 40px 28px; }
+		}
+	</style>
+</head>
+<body>
+
+<header class="topbar">
+	<div class="topbar-inner">
+		<a class="brand" href="index.html">Bluparrot x Safecon</a>
+		<nav class="nav">
+			<a href="about-us.html">About us</a>
+			<a href="capabilities.html">Capabilities</a>
+			<a href="leadership.html">Leadership</a>
+			<a href="#" class="active">Israel Desk</a>
+			<a href="atmanirbhar.html">Atmanirbhar Bharat</a>
+		</nav>
+		<a class="btn btn-primary" href="contact.html">Contact us</a>
+	</div>
+</header>
+
+<main>
+
+	<!-- ── Hero ── -->
+	<section class="hero">
+		<div class="page">
+			<div class="hero-grid">
+				<div>
+					<div class="hero-eyebrow fade-up">
+						<div class="flag-mini">
+							<span></span><span></span><span></span><span></span><span></span>
+						</div>
+						Strategic Alliance
+					</div>
+					<h1 class="fade-up d1">Israel <em>Desk.</em></h1>
+					<p class="hero-sub fade-up d2">Partnerships and supply chain excellence — trusted collaboration with Israeli defence and technology companies, bridging Mediterranean innovation with Indian manufacturing scale.</p>
+					<div class="fade-up d2" style="display:flex; gap:10px; flex-wrap:wrap;">
+						<a href="#contact" class="btn btn-primary">Explore Cooperation</a>
+						<a href="#enable" class="btn btn-dark">What we enable</a>
+					</div>
+				</div>
+				<div class="hero-right fade-up d2">
+					<div class="heritage-pill">
+						<p style="font-size:0.68rem; text-transform:uppercase; letter-spacing:0.15em; color:rgba(255,255,255,0.28); margin-bottom:10px;">Maritime &amp; defence supply</p>
+						<p>Israeli OEMs and Indian yards need the same thing: traceable material, qualified second sources, and people who stay through sea trials and FAT — not just the first handshake.</p>
+					</div>
+					<div class="stat-pair">
+						<div class="stat-item">
+							<strong>20+</strong>
+							<span>Years of Association</span>
+						</div>
+						<div class="stat-item">
+							<strong>15+</strong>
+							<span>Tier-1 Israeli Partners</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="corridor-bar">
+			<div class="page">
+				<div class="corridor-inner">
+					<div class="corridor-item">Indo-Israeli Defence Corridor</div>
+					<div class="corridor-item">Mediterranean Innovation</div>
+					<div class="corridor-item">Indian Manufacturing Scale</div>
+					<div class="corridor-item">Make in India Aligned</div>
+					<div class="corridor-item">OEM Partnerships</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── Programme Discipline ── -->
+	<section class="section">
+		<div class="page">
+			<div class="section-label">Programme Discipline</div>
+			<h2 class="section-title fade-up">From dockside to factory acceptance.</h2>
+			<div class="discipline-grid fade-up d1">
+				<div class="disc-card accent-card">
+					<div class="disc-tag">Our Heritage</div>
+					<h3>Legacy of Engagement</h3>
+					<p>Safecon Blu Parrot stands as a cornerstone in the Indo-Israeli defence corridor. For over two decades, we have facilitated high-stakes associations with premier Israeli Original Equipment Manufacturers (OEMs).</p>
+				</div>
+				<div class="disc-card">
+					<h3>What makes the difference</h3>
+					<p>Programme discipline that survives handover — traceable material, qualified second sources, and a team that stays through sea trials, FAT, and field proving. Not just the first meeting.</p>
+					<div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:20px;">
+						<span style="font-size:0.75rem; padding:5px 12px; border-radius:999px; border:1px solid var(--line); color:var(--muted);">Sea Trial Support</span>
+						<span style="font-size:0.75rem; padding:5px 12px; border-radius:999px; border:1px solid var(--line); color:var(--muted);">Factory Acceptance</span>
+						<span style="font-size:0.75rem; padding:5px 12px; border-radius:999px; border:1px solid var(--line); color:var(--muted);">Material Traceability</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── Heritage Visual ── -->
+	<section class="section soft">
+		<div class="page">
+			<div class="heritage-row">
+				<div class="heritage-visual fade-up">
+					<div class="heritage-visual-label">Strategic Indo-Israeli defence partnership focus.</div>
+				</div>
+				<div class="fade-up d1">
+					<div class="section-label">Our Heritage</div>
+					<h2 class="section-title">Two decades in the corridor.</h2>
+					<p style="color:var(--muted); font-size:0.97rem; line-height:1.82; margin:0 0 28px;">Safecon Blu Parrot stands as a cornerstone in the Indo-Israeli defence corridor. For over two decades, we have facilitated high-stakes associations with premier Israeli Original Equipment Manufacturers.</p>
+					<div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+						<div style="padding:20px; background:white; border:1px solid var(--line); border-radius:16px;">
+							<div style="font-size:2.2rem; font-weight:400; letter-spacing:-0.04em; line-height:1;">20+</div>
+							<div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-top:5px;">Years of Association</div>
+						</div>
+						<div style="padding:20px; background:white; border:1px solid var(--line); border-radius:16px;">
+							<div style="font-size:2.2rem; font-weight:400; letter-spacing:-0.04em; line-height:1;">15+</div>
+							<div style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-top:5px;">Tier-1 Israeli Partners</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── What We Enable ── -->
+	<section class="section" id="enable">
+		<div class="page">
+			<div class="section-label">What We Enable</div>
+			<h2 class="section-title fade-up">Comprehensive operational and strategic support.</h2>
+			<p class="section-lead fade-up d1">Navigating the Indian aerospace &amp; defence landscape for Israeli firms and enabling seamless programme execution both ways.</p>
+
+			<div class="enable-grid fade-up d1">
+				<div class="enable-card">
+					<div class="enable-icon">🔗</div>
+					<h3>Supply Chain &amp; Sourcing</h3>
+					<p>Streamlining complex logistics and material sourcing to ensure mission-critical components reach their destination with zero latency.</p>
+				</div>
+				<div class="enable-card">
+					<div class="enable-icon">🇮🇳</div>
+					<h3>India Market Entry</h3>
+					<p>Help Israeli firms enter India with the right partners, paperwork, and on-ground programme staff — not just introductions.</p>
+				</div>
+				<div class="enable-card">
+					<div class="enable-icon">⚙️</div>
+					<h3>Technology Integration</h3>
+					<p>Specialised support for indigenisation projects, bridging Israeli IP with Make in India mandates and domestic content requirements.</p>
+				</div>
+				<div class="enable-card">
+					<div class="enable-icon">📋</div>
+					<h3>Program &amp; Project Management</h3>
+					<p>End-to-end lifecycle management of complex defence contracts, ensuring timelines and technical benchmarks are surpassed.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── Key Verticals ── -->
+	<section class="section dark">
+		<div class="page">
+			<div class="section-label">Key Verticals</div>
+			<h2 class="section-title fade-up">Priority Tech Focus Areas.</h2>
+			<p class="section-lead fade-up d1">Our Israel Desk specialises in the most demanding segments of modern warfare, focusing on high-autonomy and digital-first systems.</p>
+
+			<div class="verticals-grid fade-up d1">
+				<div class="vertical-tile">
+					<div class="vertical-num">01</div>
+					<h4>ISR &amp; Surveillance</h4>
+					<p>Unmanned &amp; Optical</p>
+				</div>
+				<div class="vertical-tile">
+					<div class="vertical-num">02</div>
+					<h4>AI-Driven Tech</h4>
+					<p>Autonomous Decisioning</p>
+				</div>
+				<div class="vertical-tile">
+					<div class="vertical-num">03</div>
+					<h4>Comms (SDR)</h4>
+					<p>Resilient Networking</p>
+				</div>
+				<div class="vertical-tile">
+					<div class="vertical-num">04</div>
+					<h4>Naval &amp; Maritime</h4>
+					<p>Sub-Surface &amp; Surface</p>
+				</div>
+				<div class="vertical-tile">
+					<div class="vertical-num">05</div>
+					<h4>Advanced Electronics</h4>
+					<p>Embedded Systems</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── Strategic Advantage ── -->
+	<section class="section">
+		<div class="page">
+			<div class="advantage-row">
+				<div class="fade-up">
+					<div class="section-label">Strategic Advantage</div>
+					<h2 class="section-title">Israeli IP meets Indian build volume.</h2>
+					<p style="color:var(--muted); font-size:0.97rem; line-height:1.82; margin:0;">Israeli IP and Indian build volume only work when someone owns the paperwork, the factory gates, and the programme clock.</p>
+				</div>
+				<div class="advantage-points fade-up d1">
+					<div class="advantage-point">
+						<div class="adv-icon">⚡</div>
+						<div>
+							<h4>Fast-Track Entry</h4>
+							<p>Accelerated market access through established relationships and regulatory know-how.</p>
+						</div>
+					</div>
+					<div class="advantage-point">
+						<div class="adv-icon">✅</div>
+						<div>
+							<h4>Compliance Assured</h4>
+							<p>We own the paperwork, the audits, and the Indian content documentation — so you don't have to.</p>
+						</div>
+					</div>
+					<div class="advantage-point">
+						<div class="adv-icon">🏭</div>
+						<div>
+							<h4>Programme Clock Ownership</h4>
+							<p>A team that stays through factory gates, sea trials, and field acceptance — not just the intro meeting.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── CTA ── -->
+	<section class="section" id="contact">
+		<div class="page">
+			<div class="cta-block fade-up">
+				<div class="section-label">Secure Your Partnership</div>
+				<h2>Contact our Israel Desk.</h2>
+				<p>Contact our Israel Desk for partnership opportunities and strategic market navigation in the Indian defence sector.</p>
+				<div class="actions">
+					<a href="contact.html" class="btn btn-primary">Initiate Dialogue</a>
+					<a href="capabilities.html" class="btn btn-dark">View Capabilities</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</main>
+
+<footer class="site-footer">
+	<div class="page" style="padding-bottom:20px; color:rgba(255,255,255,0.65); font-size:0.92rem;">
+		<div class="brand" style="color:rgba(255,255,255,0.9); margin-bottom:8px;">Bluparrot x Safecon</div>
+		Integrated defence capabilities powered by AI, engineering, and execution.
+	</div>
+	<div class="page footer-bottom">
+		<span>© 2026 Safecon Blu Parrot. All rights reserved.</span>
+		<span>Privacy Policy</span>
+		<span>Terms of Service</span>
+	</div>
+</footer>
+
+</body>
+</html>

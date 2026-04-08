@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Leadership | Safecon Blu Parrot</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--bg: #f4f1ea;
+			--ink: #0f1115;
+			--muted: #5e5c56;
+			--line: rgba(15,17,21,0.13);
+			--accent: #6d72f5;
+			--dark: #060606;
+			--shadow: 0 20px 60px rgba(15,17,21,0.09);
+			--radius: 20px;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body { margin: 0; font-family: "Manrope", sans-serif; color: var(--ink); background: #f8f5ef; overflow-x: hidden; }
+		a { color: inherit; text-decoration: none; }
+		img { max-width: 100%; display: block; }
+
+		.page { width: min(1200px, calc(100% - 40px)); margin: 0 auto; }
+
+		/* ── Nav ── */
+		.topbar {
+			position: sticky; top: 0; z-index: 20;
+			backdrop-filter: blur(18px);
+			background: rgba(8,8,10,0.9);
+			border-bottom: 1px solid rgba(255,255,255,0.07);
+		}
+		.topbar-inner {
+			width: min(1240px, calc(100% - 32px)); margin: 0 auto;
+			min-height: 64px; display: flex; align-items: center;
+			justify-content: space-between; gap: 18px;
+			color: rgba(255,255,255,0.88);
+		}
+		.brand { font-size: 0.9rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+		.nav { display: flex; align-items: center; gap: 26px; }
+		.nav a { font-size: 0.86rem; opacity: 0.7; transition: opacity 140ms; }
+		.nav a:hover, .nav a.active { opacity: 1; }
+		.btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 0.65rem 1.2rem; font-size: 0.86rem; font-weight: 700; border: 1px solid transparent; transition: transform 160ms ease; white-space: nowrap; cursor: pointer; }
+		.btn:hover { transform: translateY(-2px); }
+		.btn-primary { background: linear-gradient(135deg,#7a7ff5,#5864ef); color: white; box-shadow: 0 10px 28px rgba(88,100,239,0.28); }
+		.btn-dark { background: #0c0c0d; color: white; border-color: rgba(255,255,255,0.1); }
+		.btn-outline-light { background: transparent; color: white; border-color: rgba(255,255,255,0.28); }
+
+		/* ── Hero ── */
+		.hero {
+			background: #060606;
+			padding: 90px 0 0;
+			color: white;
+			overflow: hidden;
+		}
+		.hero-top {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 48px;
+			align-items: end;
+			padding-bottom: 64px;
+		}
+		.hero-eyebrow {
+			font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+			letter-spacing: 0.2em; color: rgba(255,255,255,0.35);
+			margin-bottom: 18px;
+		}
+		.hero h1 {
+			font-family: "Cormorant Garamond", serif;
+			font-size: clamp(3rem, 6vw, 5.4rem);
+			line-height: 0.94; letter-spacing: -0.03em; margin: 0 0 22px;
+		}
+		.hero-lead {
+			color: rgba(255,255,255,0.5); font-size: 1rem;
+			line-height: 1.85; margin: 0; max-width: 52ch;
+		}
+
+		/* ── Status bar ── */
+		.status-bar {
+			background: rgba(255,255,255,0.04);
+			border-top: 1px solid rgba(255,255,255,0.08);
+			padding: 20px 0;
+		}
+		.status-items {
+			display: flex; gap: 0; flex-wrap: wrap;
+		}
+		.status-item {
+			display: flex; align-items: center; gap: 10px;
+			padding: 0 28px 0 0; margin-right: 28px;
+			border-right: 1px solid rgba(255,255,255,0.1);
+			font-size: 0.75rem; font-weight: 700;
+			text-transform: uppercase; letter-spacing: 0.12em;
+			color: rgba(255,255,255,0.45);
+		}
+		.status-item:last-child { border-right: none; }
+		.status-dot {
+			width: 7px; height: 7px; border-radius: 50%;
+			background: #2aaa4f; flex-shrink: 0;
+			animation: blink 2s ease infinite;
+		}
+		.status-dot.blue { background: #6d72f5; }
+		.status-dot.amber { background: #f38d43; }
+		@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+		/* ── Section base ── */
+		.section { padding: 76px 0; }
+		.section.dark { background: #070709; color: #f5f1e8; }
+		.section.soft { background: #f0ece3; }
+		.section-label {
+			font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+			letter-spacing: 0.2em; color: var(--muted); margin-bottom: 10px;
+		}
+		.dark .section-label { color: rgba(255,255,255,0.3); }
+		.section-title {
+			font-family: "Cormorant Garamond", serif;
+			font-size: clamp(2rem, 3.8vw, 3.4rem);
+			line-height: 0.97; letter-spacing: -0.03em; margin: 0 0 14px;
+		}
+		.section-lead {
+			color: var(--muted); font-size: 0.97rem; line-height: 1.82;
+			margin: 0 0 44px; max-width: 62ch;
+		}
+		.dark .section-lead { color: rgba(255,255,255,0.5); }
+
+		/* ── Values ── */
+		.values-grid {
+			display: grid;
+			grid-template-columns: 1.2fr repeat(3, 1fr);
+			gap: 2px; background: var(--line);
+			border: 1px solid var(--line); border-radius: 24px; overflow: hidden;
+		}
+		.value-card { background: white; padding: 32px 28px; }
+		.value-card.story { background: #f8f5ef; }
+		.value-card h3 { font-size: 1rem; font-weight: 700; margin: 0 0 10px; line-height: 1.3; }
+		.value-card p { font-size: 0.87rem; color: var(--muted); line-height: 1.72; margin: 0; }
+		.value-icon {
+			width: 36px; height: 36px; border-radius: 10px;
+			display: grid; place-items: center; font-size: 1rem;
+			margin-bottom: 16px;
+		}
+		.value-icon.green { background: rgba(42,170,79,0.12); }
+		.value-icon.blue { background: rgba(109,114,245,0.12); }
+		.value-icon.amber { background: rgba(243,141,67,0.12); }
+		.value-icon.ink { background: rgba(15,17,21,0.07); }
+
+		/* ── Executive board ── */
+		.exec-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 18px;
+			margin-top: 36px;
+		}
+		.exec-card {
+			border: 1px solid rgba(255,255,255,0.08);
+			border-radius: var(--radius);
+			overflow: hidden;
+			background: #0d0d10;
+		}
+		.exec-head {
+			display: flex; align-items: center; justify-content: space-between;
+			padding: 14px 20px;
+			border-bottom: 1px solid rgba(255,255,255,0.07);
+			font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+			letter-spacing: 0.14em; color: rgba(255,255,255,0.3);
+		}
+		.exec-badge {
+			font-size: 0.65rem; padding: 3px 10px; border-radius: 999px;
+			background: rgba(109,114,245,0.15); color: #9fa3f8;
+			border: 1px solid rgba(109,114,245,0.2); letter-spacing: 0.1em;
+		}
+		.exec-body { padding: 28px 24px; }
+		.exec-name {
+			font-family: "Cormorant Garamond", serif;
+			font-size: 2rem; font-weight: 600; line-height: 1;
+			letter-spacing: -0.02em; color: white; margin: 0 0 6px;
+		}
+		.exec-role { font-size: 0.82rem; color: rgba(255,255,255,0.4); margin: 0 0 20px; }
+		.exec-focus-label {
+			font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.14em;
+			color: rgba(255,255,255,0.28); margin-bottom: 10px;
+		}
+		.exec-focus-text { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.65; margin: 0 0 20px; }
+		.exec-tag {
+			display: inline-flex; align-items: center; gap: 6px;
+			font-size: 0.7rem; font-weight: 600; padding: 5px 12px;
+			border-radius: 999px; border: 1px solid rgba(255,255,255,0.1);
+			color: rgba(255,255,255,0.5); letter-spacing: 0.06em;
+			text-transform: uppercase;
+		}
+		.exec-tag::before { content:""; width:5px; height:5px; border-radius:50%; background:#6d72f5; flex-shrink:0; }
+
+		/* ── Bio cards ── */
+		.bio-section { padding: 76px 0; }
+		.bio-card {
+			display: grid;
+			grid-template-columns: 340px 1fr;
+			gap: 0;
+			border: 1px solid var(--line);
+			border-radius: 24px;
+			overflow: hidden;
+			margin-bottom: 20px;
+			background: white;
+		}
+		.bio-card:last-child { margin-bottom: 0; }
+		.bio-portrait {
+			position: relative;
+			min-height: 380px;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+			padding: 28px;
+		}
+		.bio-portrait.nitin {
+			background:
+				radial-gradient(circle at 50% 22%, rgba(255,218,185,0.98) 0 16%, rgba(150,100,75,0.85) 16.2% 17.5%, transparent 17.8%),
+				linear-gradient(180deg, #c8d4e8 0%, #a0b8d4 32%, #1f2d4a 32%, #141c2e 100%);
+		}
+		.bio-portrait.aditya {
+			background:
+				radial-gradient(circle at 50% 22%, rgba(255,210,175,0.98) 0 16%, rgba(145,90,65,0.85) 16.2% 17.5%, transparent 17.8%),
+				linear-gradient(180deg, #e8e0d0 0%, #c8b898 32%, #3a2518 32%, #1a100c 100%);
+		}
+		.bio-portrait::before {
+			content: "";
+			width: 64%;
+			height: 70%;
+			border-radius: 44% 44% 16% 16%;
+			position: absolute;
+			bottom: 0; left: 50%;
+			transform: translateX(-50%);
+		}
+		.bio-portrait.nitin::before {
+			background: linear-gradient(180deg, #e8c49a 0%, #c89a72 28%, #2a4070 28%, #1a2844 100%);
+			box-shadow: inset 0 0 0 12px rgba(255,255,255,0.05);
+		}
+		.bio-portrait.aditya::before {
+			background: linear-gradient(180deg, #2a2826 0%, #2a2826 18%, #c09878 18%, #8a6050 28%, #1c2e50 28%, #101828 100%);
+		}
+		.bio-portrait.aditya.aditya-photo {
+			background: #101219 url("605A9260.png") center 12% / cover no-repeat;
+		}
+		.bio-portrait.aditya.aditya-photo::before {
+			display: none;
+		}
+		.bio-portrait.aditya.aditya-photo::after {
+			content: "";
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			height: 38%;
+			background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(247,243,236,0.88) 55%, rgba(247,243,236,0.96) 100%);
+		}
+		.bio-portrait.aditya.aditya-photo .bio-label,
+		.bio-portrait.aditya.aditya-photo .bio-portrait-name {
+			color: #111318;
+			text-shadow: none;
+		}
+		.bio-portrait.nitin.nitin-photo {
+			background: #101219 url("nitin-UcagaIvN (2).png") center 22% / cover no-repeat;
+		}
+		.bio-portrait.nitin.nitin-photo::before {
+			display: none;
+		}
+		.bio-label {
+			position: relative; z-index: 2;
+			font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.16em;
+			color: rgba(255,255,255,0.4); margin-bottom: 6px;
+		}
+		.bio-portrait-name {
+			position: relative; z-index: 2;
+			font-family: "Cormorant Garamond", serif;
+			font-size: 1.6rem; color: white; line-height: 1.1; margin: 0;
+		}
+		.bio-content { padding: 36px 40px; }
+		.bio-role { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 16px; }
+		.bio-intro { font-size: 0.95rem; line-height: 1.85; color: var(--muted); margin: 0 0 28px; }
+		.bio-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+		.bio-col-title {
+			font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+			letter-spacing: 0.14em; color: var(--ink); margin-bottom: 12px;
+		}
+		.bio-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; }
+		.bio-list li { font-size: 0.85rem; color: var(--muted); line-height: 1.55; padding-left: 14px; position: relative; }
+		.bio-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent); font-size: 0.75rem; }
+
+		/* ── Thought Leadership ── */
+		.tl-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 14px;
+			margin-top: 32px;
+		}
+		.tl-item {
+			padding: 22px 24px;
+			border-radius: var(--radius);
+			border: 1px solid rgba(255,255,255,0.08);
+			background: rgba(255,255,255,0.04);
+			font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.6;
+			display: flex; align-items: flex-start; gap: 12px;
+		}
+		.tl-item::before { content: "↗"; color: var(--accent); flex-shrink: 0; font-size: 1rem; }
+
+		/* ── CTA ── */
+		.cta-section { padding: 80px 0; }
+		.cta-grid {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 16px;
+		}
+		.cta-card {
+			border-radius: 24px; padding: 48px 44px;
+			display: flex; flex-direction: column; gap: 18px;
+		}
+		.cta-card.dark-cta {
+			background: linear-gradient(135deg, #0a0a0c, #14141a);
+			border: 1px solid rgba(255,255,255,0.08);
+			color: white;
+		}
+		.cta-card.light-cta {
+			background: white;
+			border: 1px solid var(--line);
+		}
+		.cta-card h3 {
+			font-family: "Cormorant Garamond", serif;
+			font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+			line-height: 1.05; letter-spacing: -0.02em; margin: 0;
+		}
+		.cta-card p { font-size: 0.92rem; line-height: 1.72; margin: 0; }
+		.dark-cta p { color: rgba(255,255,255,0.48); }
+		.light-cta p { color: var(--muted); }
+		.cta-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+
+		/* ── Footer ── */
+		.site-footer { padding: 32px 0 20px; background: #070707; color: rgba(255,255,255,0.9); border-top: 1px solid rgba(255,255,255,0.07); }
+		.footer-bottom { display: flex; gap: 16px; justify-content: space-between; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); font-size: 0.82rem; flex-wrap: wrap; }
+
+		/* ── Fade ── */
+		.fade-up { animation: fadeUp 800ms ease both; }
+		.d1 { animation-delay: 100ms; }
+		.d2 { animation-delay: 200ms; }
+		.d3 { animation-delay: 300ms; }
+		@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+		/* ── Responsive ── */
+		@media (max-width: 960px) {
+			.hero-top, .values-grid, .exec-grid, .bio-cols, .tl-grid, .cta-grid { grid-template-columns: 1fr; }
+			.bio-card { grid-template-columns: 1fr; }
+			.bio-portrait { min-height: 280px; }
+			.values-grid { background: none; gap: 14px; }
+			.value-card { border: 1px solid var(--line); border-radius: 16px; }
+		}
+		@media (max-width: 640px) {
+			.topbar-inner { flex-direction: column; align-items: flex-start; padding: 10px 0; }
+			.bio-content { padding: 24px 22px; }
+		}
+	</style>
+</head>
+<body>
+
+<header class="topbar">
+	<div class="topbar-inner">
+		<a class="brand" href="index.html">Bluparrot x Safecon</a>
+		<nav class="nav">
+			<a href="about-us.html">About us</a>
+			<a href="capabilities.html">Capabilities</a>
+			<a href="#" class="active">Leadership</a>
+			<a href="israel-desk.html">Israel Desk</a>
+			<a href="atmanirbhar.html">Atmanirbhar Bharat</a>
+		</nav>
+		<a class="btn btn-primary" href="contact.html">Contact us</a>
+	</div>
+</header>
+
+<main>
+
+	<!-- ── Hero ── -->
+	<section class="hero">
+		<div class="page">
+			<div class="hero-top">
+				<div>
+					<p class="hero-eyebrow fade-up">Leadership</p>
+					<h1 class="fade-up d1">People behind aerospace &amp; defence delivery.</h1>
+					<p class="hero-lead fade-up d2">Operators and builders first: integration leads, AI leads, and programme managers who still touch hardware and customer sites.</p>
+				</div>
+				<div class="fade-up d2" style="display:flex; flex-direction:column; gap:12px; justify-content:flex-end; padding-bottom:8px;">
+					<div style="font-size:0.68rem; text-transform:uppercase; letter-spacing:0.18em; color:rgba(255,255,255,0.28); margin-bottom:4px;">Strategic Command</div>
+					<p style="font-size:0.92rem; color:rgba(255,255,255,0.48); line-height:1.75; margin:0; max-width:46ch;">Guided by industry veterans with deep expertise in aerospace engineering and tactical artificial intelligence.</p>
+					<div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:8px;">
+						<span style="font-size:0.7rem; padding:5px 13px; border-radius:999px; border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.45);">Executive Board</span>
+						<span style="font-size:0.7rem; padding:5px 13px; border-radius:999px; border:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.45);">Delivery-focused</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="status-bar">
+			<div class="page">
+				<div class="status-items">
+					<div class="status-item">AI — System Status</div>
+					<div class="status-item">100% Indigenous Development</div>
+					<div class="status-item">Advanced Systems Integration</div>
+					<div class="status-item">ENG — Strategic Command</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── Company Values ── -->
+	<section class="section">
+		<div class="page">
+			<div class="section-label">Company Story &amp; Values</div>
+			<h2 class="section-title fade-up">How we think about the work.</h2>
+			<p class="section-lead fade-up d1">We started from manufacturing and integration work that had to pass customer FAT and field trials. AI joined the picture where programmes actually needed imagery, fusion, and operator workflows—not as a slide-deck add-on.</p>
+
+			<div class="values-grid fade-up d1">
+				<div class="value-card story">
+					<h3>Built from the floor up</h3>
+					<p>Every capability we offer started on a factory floor, a naval deck, or a field trial — not a whiteboard. Integration work that had to pass customer FAT shaped how we approach every programme.</p>
+				</div>
+				<div class="value-card">
+					<h3>Domestic ownership</h3>
+					<p>Where Atmanirbhar applies, we document Indian content, suppliers, and tech transfer steps so audits are boring — in a good way.</p>
+				</div>
+				<div class="value-card">
+					<h3>Test like it ships</h3>
+					<p>Environmental, EMI, and software regression paths are scoped to the platform's real deployment — not a lab demo.</p>
+				</div>
+				<div class="value-card">
+					<h3>Useful AI only</h3>
+					<p>Models and pipelines ship when they improve detection, maintenance, or C2 decisions — not when they merely look modern.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── Executive Board ── -->
+	<section class="section dark">
+		<div class="page">
+			<div class="section-label">Executive Board</div>
+			<h2 class="section-title fade-up">The founders.</h2>
+			<p class="section-lead fade-up d1">Two co-founders — one AI-first, one systems-first. Together they cover the full stack from data pipelines to field deployment.</p>
+
+			<div class="exec-grid fade-up d1">
+				<!-- Nitin -->
+				<div class="exec-card">
+					<div class="exec-head">
+						<span>Co-Founder &amp; Technology Strategist</span>
+						<span class="exec-badge">AI Integration</span>
+					</div>
+					<div class="exec-body">
+						<h3 class="exec-name">Nitin Kalra</h3>
+						<p class="exec-role">Co-Founder &amp; Technology Strategist · Blu Parrot</p>
+						<p class="exec-focus-label">Focus Areas</p>
+						<p class="exec-focus-text">AI &amp; data platforms, satellite image analytics, and autonomous decision support for modern warfare.</p>
+						<span class="exec-tag">Strategic Focus: AI Integration</span>
+					</div>
+				</div>
+				<!-- Aditya -->
+				<div class="exec-card">
+					<div class="exec-head">
+						<span>Co-Founder &amp; Chief Systems Engineer</span>
+						<span class="exec-badge">System Readiness</span>
+					</div>
+					<div class="exec-body">
+						<h3 class="exec-name">Aditya Arora</h3>
+						<p class="exec-role">Co-Founder &amp; Chief Systems Engineer · Safecon</p>
+						<p class="exec-focus-label">Focus Areas</p>
+						<p class="exec-focus-text">Defence engineering, naval systems integration, and modular architectures for operational readiness.</p>
+						<span class="exec-tag">Strategic Focus: System Readiness</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── Bio: Nitin ── -->
+	<section class="bio-section">
+		<div class="page">
+			<div class="section-label" style="margin-bottom:24px;">Co-Founder Profile</div>
+
+			<div class="bio-card fade-up">
+				<div class="bio-portrait nitin nitin-photo">
+					<p class="bio-label">Co-Founder</p>
+					<h3 class="bio-portrait-name">Nitin Kalra</h3>
+				</div>
+				<div class="bio-content">
+					<p class="bio-role">Technology Strategist &amp; Defence Innovation Enabler</p>
+					<p class="bio-intro">Nitin Kalra leads Safecon Blu Parrot's vision of integrating Artificial Intelligence with real-world defence execution. With a strong track record of building global AI and data-driven platforms, Nitin has positioned Blu Parrot at the forefront of AI-powered defence systems.</p>
+					<div class="bio-cols">
+						<div>
+							<p class="bio-col-title">Core Expertise</p>
+							<ul class="bio-list">
+								<li>AI-powered intelligence systems</li>
+								<li>Satellite image analytics &amp; ISR platforms</li>
+								<li>Predictive analytics for mission-critical environments</li>
+								<li>Digital transformation for defence and government ecosystems</li>
+							</ul>
+						</div>
+						<div>
+							<p class="bio-col-title">Leadership Focus</p>
+							<ul class="bio-list">
+								<li>AI in Modern Warfare &amp; Defence Digitisation</li>
+								<li>Data Fusion &amp; Multi-Source Intelligence Systems</li>
+								<li>Autonomous Decision Support Platforms</li>
+								<li>Defence AI Ecosystems &amp; Future Readiness</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Bio: Aditya -->
+			<div class="bio-card fade-up d1">
+				<div class="bio-portrait aditya aditya-photo">
+					<p class="bio-label">Co-Founder</p>
+					<h3 class="bio-portrait-name">Aditya Arora</h3>
+				</div>
+				<div class="bio-content">
+					<p class="bio-role">Defence Engineering &amp; Systems Integration Lead</p>
+					<p class="bio-intro">Aditya Arora leads the defence engineering and systems integration vertical, bringing deep expertise in mission-critical programs, naval systems, and complex defence deployments. He has successfully driven execution across strategic defence programs with precision engineering and battlefield-ready reliability.</p>
+					<div class="bio-cols">
+						<div>
+							<p class="bio-col-title">Core Expertise</p>
+							<ul class="bio-list">
+								<li>SCA 2.2.2 and strategic defence programs</li>
+								<li>SDR (Software Defined Radio) integration</li>
+								<li>Slip ring systems &amp; rotating platforms</li>
+								<li>Naval systems, lifeboats, and high-altitude solutions</li>
+							</ul>
+						</div>
+						<div>
+							<p class="bio-col-title">Leadership Focus</p>
+							<ul class="bio-list">
+								<li>Systems Engineering &amp; Integration Architecture</li>
+								<li>Defence Manufacturing &amp; Indigenisation</li>
+								<li>Program &amp; Lifecycle Management</li>
+								<li>Global Supply Chain &amp; Vendor Ecosystems</li>
+								<li>Onsite (Onbase) &amp; Offshore (Offbase) Execution</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── Thought Leadership ── -->
+	<section class="section dark">
+		<div class="page">
+			<div class="section-label">Thought Leadership</div>
+			<h2 class="section-title fade-up">Our leads publish, prototype, and sit on programmes.</h2>
+			<p class="section-lead fade-up d1">Not just slide decks — active contributors to frameworks and research that shape how defence systems get built.</p>
+			<div class="tl-grid fade-up d1">
+				<div class="tl-item">Defence AI whitepapers and research publications</div>
+				<div class="tl-item">System integration frameworks for next-gen warfare</div>
+				<div class="tl-item">Indigenisation strategies aligned with national priorities</div>
+				<div class="tl-item">Emerging technologies: AI, ISR, SDR, autonomous systems</div>
+				<div class="tl-item">Indigenous Defence Manufacturing Ecosystems</div>
+				<div class="tl-item">Modular &amp; Scalable Defence Architectures</div>
+				<div class="tl-item">Operational Readiness &amp; Deployment Frameworks</div>
+				<div class="tl-item">Positioning as Industry Innovators</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── CTA ── -->
+	<section class="cta-section">
+		<div class="page">
+			<div class="cta-grid">
+				<div class="cta-card dark-cta fade-up">
+					<h3>Join the Vanguard of Defence</h3>
+					<p>We hire engineers and programme people who like classified hangars as much as Git repos. If that sounds like you, get in touch.</p>
+					<div class="cta-actions">
+						<a href="index.html#contact" class="btn btn-primary">Explore Careers</a>
+					</div>
+				</div>
+				<div class="cta-card light-cta fade-up d1">
+					<h3>Partner With Us</h3>
+					<p>Bring your programme, platform, or system integration challenge. We'll align the right team and delivery model from day one.</p>
+					<div class="cta-actions">
+						<a href="contact.html" class="btn btn-dark">Get in touch</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</main>
+
+<footer class="site-footer">
+	<div class="page" style="padding-bottom:20px; color:rgba(255,255,255,0.65); font-size:0.92rem;">
+		<div class="brand" style="color:rgba(255,255,255,0.9); margin-bottom:8px;">Bluparrot x Safecon</div>
+		Integrated defence capabilities powered by AI, engineering, and execution.
+	</div>
+	<div class="page footer-bottom">
+		<span>© 2026 Safecon Blu Parrot. All rights reserved.</span>
+		<span>Privacy Policy</span>
+		<span>Terms of Service</span>
+	</div>
+</footer>
+
+</body>
+</html>

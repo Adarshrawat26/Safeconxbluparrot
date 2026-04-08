@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Contact | Safecon Blu Parrot</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--bg: #f6f2ea;
+			--ink: #101218;
+			--muted: #5d5b56;
+			--line: rgba(16, 18, 24, 0.13);
+			--accent: #5f6df2;
+			--dark: #090a0f;
+			--soft: #efe9df;
+			--radius: 20px;
+			--shadow: 0 22px 58px rgba(16, 18, 24, 0.08);
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body {
+			margin: 0;
+			font-family: "Manrope", sans-serif;
+			color: var(--ink);
+			background: var(--bg);
+			overflow-x: hidden;
+		}
+		a { color: inherit; text-decoration: none; }
+		.page { width: min(1200px, calc(100% - 40px)); margin: 0 auto; }
+
+		.topbar {
+			position: sticky;
+			top: 0;
+			z-index: 30;
+			background: rgba(8, 8, 12, 0.9);
+			backdrop-filter: blur(16px);
+			border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		}
+		.topbar-inner {
+			width: min(1240px, calc(100% - 32px));
+			margin: 0 auto;
+			min-height: 64px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 18px;
+			color: rgba(255, 255, 255, 0.88);
+		}
+		.brand {
+			font-size: 0.9rem;
+			font-weight: 800;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+		}
+		.nav { display: flex; align-items: center; gap: 26px; }
+		.nav a {
+			font-size: 0.86rem;
+			opacity: 0.7;
+			transition: opacity 140ms;
+		}
+		.nav a:hover,
+		.nav a.active { opacity: 1; }
+		.btn {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 999px;
+			padding: 0.65rem 1.2rem;
+			font-size: 0.86rem;
+			font-weight: 700;
+			border: 1px solid transparent;
+			transition: transform 160ms ease;
+			white-space: nowrap;
+			cursor: pointer;
+		}
+		.btn:hover { transform: translateY(-2px); }
+		.btn-primary {
+			background: linear-gradient(135deg, #7a80f5, #5864ef);
+			color: #fff;
+			box-shadow: 0 10px 28px rgba(88, 100, 239, 0.3);
+		}
+		.btn-dark {
+			background: #0c0c10;
+			color: #fff;
+			border-color: rgba(255, 255, 255, 0.12);
+		}
+		.btn-outline {
+			background: transparent;
+			color: var(--ink);
+			border-color: var(--line);
+		}
+
+		.hero {
+			padding: 84px 0 54px;
+			color: #fff;
+			background: radial-gradient(circle at 82% 30%, rgba(95, 109, 242, 0.2), transparent 42%), linear-gradient(155deg, #07080c 0%, #0c0f1a 100%);
+			border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		}
+		.hero-grid {
+			display: grid;
+			grid-template-columns: 1.1fr 0.9fr;
+			gap: 38px;
+			align-items: end;
+		}
+		.eyebrow {
+			font-size: 0.68rem;
+			font-weight: 700;
+			letter-spacing: 0.18em;
+			text-transform: uppercase;
+			color: rgba(255, 255, 255, 0.34);
+			margin-bottom: 14px;
+		}
+		h1 {
+			font-family: "Cormorant Garamond", serif;
+			font-size: clamp(2.6rem, 5.6vw, 5rem);
+			line-height: 0.95;
+			letter-spacing: -0.03em;
+			margin: 0 0 12px;
+		}
+		.hero p {
+			margin: 0;
+			font-size: 0.98rem;
+			line-height: 1.82;
+			color: rgba(255, 255, 255, 0.58);
+			max-width: 62ch;
+		}
+		.hero-panel {
+			padding: 24px;
+			border-radius: 16px;
+			border: 1px solid rgba(255, 255, 255, 0.12);
+			background: rgba(255, 255, 255, 0.05);
+		}
+		.hero-panel h3 {
+			margin: 0 0 10px;
+			font-size: 0.82rem;
+			letter-spacing: 0.14em;
+			text-transform: uppercase;
+			color: rgba(255, 255, 255, 0.44);
+		}
+		.hero-panel p {
+			font-size: 0.86rem;
+			line-height: 1.74;
+			color: rgba(255, 255, 255, 0.58);
+		}
+
+		.section { padding: 76px 0; }
+		.section.soft { background: var(--soft); }
+		.section.dark { background: #07080c; color: #f5f2eb; }
+		.label {
+			font-size: 0.68rem;
+			font-weight: 700;
+			letter-spacing: 0.18em;
+			text-transform: uppercase;
+			color: var(--muted);
+			margin-bottom: 8px;
+		}
+		.dark .label { color: rgba(255, 255, 255, 0.34); }
+		.section h2 {
+			font-family: "Cormorant Garamond", serif;
+			font-size: clamp(2rem, 3.9vw, 3.4rem);
+			line-height: 0.99;
+			letter-spacing: -0.03em;
+			margin: 0 0 12px;
+		}
+		.lead {
+			margin: 0 0 30px;
+			font-size: 0.96rem;
+			line-height: 1.8;
+			color: var(--muted);
+			max-width: 64ch;
+		}
+		.dark .lead { color: rgba(255, 255, 255, 0.58); }
+
+		.grid-2 {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 16px;
+		}
+		.card {
+			border-radius: var(--radius);
+			border: 1px solid var(--line);
+			background: #fff;
+			padding: 24px;
+			box-shadow: var(--shadow);
+		}
+		.card h3 {
+			font-size: 1.02rem;
+			margin: 0 0 12px;
+		}
+		.card p {
+			margin: 0;
+			font-size: 0.9rem;
+			line-height: 1.75;
+			color: var(--muted);
+		}
+		.channel {
+			display: grid;
+			grid-template-columns: 120px 1fr;
+			gap: 12px;
+			padding: 12px 0;
+			border-bottom: 1px solid var(--line);
+		}
+		.channel:last-child { border-bottom: none; }
+		.channel strong {
+			font-size: 0.72rem;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: #4f4d47;
+		}
+		.channel span {
+			font-size: 0.9rem;
+			line-height: 1.6;
+			color: var(--muted);
+		}
+		.conf-note {
+			margin-top: 18px;
+			padding: 12px 14px;
+			border-radius: 12px;
+			border: 1px dashed rgba(16, 18, 24, 0.2);
+			background: #f8f4ec;
+			font-size: 0.82rem;
+			line-height: 1.6;
+			color: #68645c;
+		}
+
+		.form-wrap {
+			padding: 24px;
+			border-radius: var(--radius);
+			border: 1px solid var(--line);
+			background: #fff;
+			box-shadow: var(--shadow);
+		}
+		.form-title {
+			font-size: 1.06rem;
+			font-weight: 700;
+			margin: 0 0 4px;
+		}
+		.form-sub {
+			margin: 0 0 18px;
+			font-size: 0.83rem;
+			color: var(--muted);
+		}
+		form {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 12px;
+		}
+		.field {
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+		}
+		.field.full { grid-column: span 2; }
+		label {
+			font-size: 0.75rem;
+			font-weight: 700;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: #45433d;
+		}
+		input,
+		select,
+		textarea {
+			font: inherit;
+			font-size: 0.9rem;
+			border: 1px solid var(--line);
+			border-radius: 12px;
+			padding: 12px 14px;
+			background: #fcfbf7;
+			color: var(--ink);
+		}
+		textarea {
+			min-height: 130px;
+			resize: vertical;
+		}
+		.form-note {
+			grid-column: span 2;
+			margin: 2px 0 0;
+			font-size: 0.8rem;
+			color: #6c675d;
+			line-height: 1.55;
+		}
+
+		.feature-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 14px;
+		}
+		.feature {
+			padding: 20px;
+			border-radius: 16px;
+			border: 1px solid rgba(255, 255, 255, 0.12);
+			background: rgba(255, 255, 255, 0.04);
+		}
+		.feature h3 {
+			margin: 0 0 8px;
+			font-size: 0.94rem;
+			line-height: 1.4;
+			color: rgba(255, 255, 255, 0.9);
+		}
+		.feature p {
+			margin: 0;
+			font-size: 0.87rem;
+			line-height: 1.7;
+			color: rgba(255, 255, 255, 0.58);
+		}
+
+		.cta-box {
+			padding: 44px;
+			border-radius: 26px;
+			text-align: center;
+			background: linear-gradient(145deg, #060710, #0d101f);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+		}
+		.cta-box h2 { color: #fff; margin-bottom: 10px; }
+		.cta-box p {
+			margin: 0 auto 24px;
+			max-width: 56ch;
+			font-size: 0.95rem;
+			line-height: 1.8;
+			color: rgba(255, 255, 255, 0.56);
+		}
+
+		.site-footer {
+			padding: 32px 0 20px;
+			background: #070707;
+			color: rgba(255, 255, 255, 0.9);
+			border-top: 1px solid rgba(255, 255, 255, 0.07);
+		}
+		.footer-bottom {
+			display: flex;
+			gap: 16px;
+			justify-content: space-between;
+			padding-top: 14px;
+			border-top: 1px solid rgba(255, 255, 255, 0.1);
+			color: rgba(255, 255, 255, 0.4);
+			font-size: 0.82rem;
+			flex-wrap: wrap;
+		}
+
+		.fade-up { animation: fadeUp 800ms ease both; }
+		.d1 { animation-delay: 120ms; }
+		.d2 { animation-delay: 240ms; }
+		@keyframes fadeUp {
+			from { opacity: 0; transform: translateY(16px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+
+		@media (max-width: 1024px) {
+			.hero-grid,
+			.grid-2,
+			.feature-grid {
+				grid-template-columns: 1fr 1fr;
+			}
+			.feature-grid .feature:last-child { grid-column: span 2; }
+		}
+		@media (max-width: 740px) {
+			.topbar-inner { flex-direction: column; align-items: flex-start; padding: 10px 0; }
+			.hero-grid,
+			.grid-2,
+			.feature-grid,
+			form {
+				grid-template-columns: 1fr;
+			}
+			.feature-grid .feature:last-child,
+			.field.full,
+			.form-note { grid-column: span 1; }
+			.channel { grid-template-columns: 1fr; gap: 4px; }
+			.cta-box { padding: 32px 20px; }
+		}
+	</style>
+</head>
+<body>
+
+<header class="topbar">
+	<div class="topbar-inner">
+		<a class="brand" href="index.html">Bluparrot x Safecon</a>
+		<nav class="nav">
+			<a href="about-us.html">About us</a>
+			<a href="capabilities.html">Capabilities</a>
+			<a href="leadership.html">Leadership</a>
+			<a href="israel-desk.html">Israel Desk</a>
+			<a href="atmanirbhar.html">Atmanirbhar Bharat</a>
+		</nav>
+		<a class="btn btn-primary" href="contact.html">Contact us</a>
+	</div>
+</header>
+
+<main>
+	<section class="hero">
+		<div class="page hero-grid">
+			<div>
+				<p class="eyebrow fade-up">Contact</p>
+				<h1 class="fade-up d1">Talk to us about your programme.</h1>
+				<p class="fade-up d1">Ready to discuss your defence and aerospace initiatives? Our team is available to scope requirements, share whitepapers, or set up a strategic consultation.</p>
+				<div class="fade-up d2" style="margin-top: 24px; display: flex; gap: 10px; flex-wrap: wrap;">
+					<a class="btn btn-primary" href="#reach">Reach Out</a>
+				</div>
+			</div>
+			<div class="hero-panel fade-up d2">
+				<h3>Direct Channels</h3>
+				<p>For defence program inquiries, partnership discussions, or technical consultations, connect with us through secure official channels below.</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="section" id="reach">
+		<div class="page grid-2">
+			<article class="card fade-up">
+				<h3>Direct Channels</h3>
+				<div class="channel">
+					<strong>Email</strong>
+					<span>contact@safeconbluparrot.com</span>
+				</div>
+				<div class="channel">
+					<strong>Phone</strong>
+					<span>+91 XXXXX XXXXX</span>
+				</div>
+				<div class="channel">
+					<strong>Business Hours</strong>
+					<span>Mon - Fri, 09:00 - 18:00 IST</span>
+				</div>
+				<div class="channel">
+					<strong>Response</strong>
+					<span>Within 24 business hours</span>
+				</div>
+				<div class="conf-note">All communications are handled under strict defence-grade confidentiality protocols. ITAR and EAR compliance maintained across all channels.</div>
+			</article>
+			<article class="card fade-up d1">
+				<h3>Locations</h3>
+				<div class="channel">
+					<strong>Delhi NCR, India</strong>
+					<span>Headquarters<br />Address to be added</span>
+				</div>
+				<div class="channel">
+					<strong>Global Operations</strong>
+					<span>International<br />Multi-location presence</span>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<section class="section soft" id="secure-message">
+		<div class="page">
+			<div class="label">Send a Secure Message</div>
+			<h2>Submit your programme brief</h2>
+			<p class="lead">Fields marked with * are required</p>
+			<div class="form-wrap fade-up d1">
+				<p class="form-title">Send a Secure Message</p>
+				<p class="form-sub">Fields marked with * are required</p>
+				<form>
+					<div class="field">
+						<label for="full-name">Full Name *</label>
+						<input id="full-name" type="text" placeholder="Your full name" required />
+					</div>
+					<div class="field">
+						<label for="email">Email Address *</label>
+						<input id="email" type="email" placeholder="your@email.com" required />
+					</div>
+					<div class="field">
+						<label for="org">Organization</label>
+						<input id="org" type="text" placeholder="Company / Organization" />
+					</div>
+					<div class="field">
+						<label for="phone">Phone Number</label>
+						<input id="phone" type="text" placeholder="+91 XXXXX XXXXX" />
+					</div>
+					<div class="field full">
+						<label for="inquiry">Inquiry Type</label>
+						<select id="inquiry">
+							<option selected>Select inquiry type...</option>
+							<option>Defence Program Inquiry</option>
+							<option>Partnership Discussion</option>
+							<option>Technical Consultation</option>
+							<option>Whitepaper Request</option>
+						</select>
+					</div>
+					<div class="field full">
+						<label for="message">Message *</label>
+						<textarea id="message" placeholder="Tell us about your programme requirements, timelines, or technical specifications..." required></textarea>
+					</div>
+					<p class="form-note">By submitting, you agree to our confidentiality and data handling protocols.</p>
+					<div class="field full">
+						<button type="button" class="btn btn-primary">Send Message</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+
+	<section class="section dark" id="global-reach">
+		<div class="page">
+			<div class="label">Global Reach</div>
+			<h2>Multi-Location Operations</h2>
+			<p class="lead">Supporting defence programs across India and globally with flexible onsite and offshore engagement models.</p>
+			<div class="feature-grid fade-up d1">
+				<article class="feature">
+					<h3>Primary Hub<br />India Operations</h3>
+					<p>Headquarters in Delhi NCR with manufacturing and integration facilities across the country.</p>
+				</article>
+				<article class="feature">
+					<h3>25+ Nations<br />International Reach</h3>
+					<p>25+ countries served through strategic partnerships, supply chain networks, and offshore teams.</p>
+				</article>
+				<article class="feature">
+					<h3>Cleared Facility<br />Secure Engagement</h3>
+					<p>Defence-grade communication protocols, ITAR compliance, and classified program support capability.</p>
+				</article>
+			</div>
+		</div>
+	</section>
+
+	<section class="section" id="schedule">
+		<div class="page">
+			<div class="cta-box fade-up">
+				<h2>Ready for a strategic consultation?</h2>
+				<p>Schedule a call with our leadership team to discuss programme requirements, technology partnerships, or indigenisation roadmaps.</p>
+				<a class="btn btn-primary" href="#">Schedule Call</a>
+			</div>
+		</div>
+	</section>
+</main>
+
+<footer class="site-footer">
+	<div class="page" style="padding-bottom:20px; color:rgba(255,255,255,0.65); font-size:0.92rem;">
+		<div class="brand" style="color:rgba(255,255,255,0.9); margin-bottom:8px;">Bluparrot x Safecon</div>
+		Integrated defence capabilities powered by AI, engineering, and execution.
+	</div>
+	<div class="page footer-bottom">
+		<span>© 2026 Safecon Blu Parrot. All rights reserved.</span>
+		<span>Privacy Policy</span>
+		<span>Terms of Service</span>
+	</div>
+</footer>
+
+</body>
+</html>

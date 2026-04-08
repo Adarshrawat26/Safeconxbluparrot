@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Capabilities | Safecon Blu Parrot</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet" />
+	<style>
+		:root {
+			--bg: #f4f1ea;
+			--bg-soft: #efe9de;
+			--ink: #0f1115;
+			--muted: #5e5c56;
+			--line: rgba(15, 17, 21, 0.14);
+			--accent: #6d72f5;
+			--accent-2: #f38d43;
+			--dark: #050505;
+			--dark-soft: #121212;
+			--card: rgba(255, 255, 255, 0.52);
+			--shadow: 0 24px 80px rgba(15, 17, 21, 0.08);
+			--radius: 20px;
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; }
+		body {
+			margin: 0;
+			font-family: "Manrope", sans-serif;
+			color: var(--ink);
+			background: #f8f5ef;
+			overflow-x: hidden;
+		}
+
+		a { color: inherit; text-decoration: none; }
+		img { max-width: 100%; display: block; }
+
+		.page {
+			width: min(1200px, calc(100% - 40px));
+			margin: 0 auto;
+		}
+
+		/* ── Topbar ── */
+		.topbar {
+			position: sticky;
+			top: 0;
+			z-index: 20;
+			backdrop-filter: blur(18px);
+			background: rgba(14, 14, 15, 0.88);
+			border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		}
+
+		.topbar-inner {
+			width: min(1240px, calc(100% - 32px));
+			margin: 0 auto;
+			min-height: 64px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 18px;
+			color: rgba(255, 255, 255, 0.88);
+		}
+
+		.brand {
+			font-size: 0.9rem;
+			font-weight: 800;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+			white-space: nowrap;
+		}
+
+		.nav {
+			display: flex;
+			align-items: center;
+			gap: 26px;
+			flex-wrap: wrap;
+		}
+
+		.nav a {
+			font-size: 0.86rem;
+			opacity: 0.75;
+			transition: opacity 160ms ease;
+		}
+
+		.nav a:hover, .nav a.active { opacity: 1; }
+
+		.btn {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 999px;
+			padding: 0.65rem 1.2rem;
+			font-size: 0.86rem;
+			font-weight: 700;
+			border: 1px solid transparent;
+			transition: transform 160ms ease, box-shadow 160ms ease;
+			white-space: nowrap;
+			cursor: pointer;
+		}
+
+		.btn:hover { transform: translateY(-2px); }
+
+		.btn-primary {
+			background: linear-gradient(135deg, #7a7ff5 0%, #5864ef 100%);
+			color: white;
+			box-shadow: 0 12px 28px rgba(88, 100, 239, 0.28);
+		}
+
+		.btn-outline {
+			background: transparent;
+			color: white;
+			border-color: rgba(255, 255, 255, 0.3);
+		}
+
+		.btn-dark {
+			background: #0c0c0d;
+			color: white;
+			border-color: rgba(255, 255, 255, 0.1);
+		}
+
+		/* ── Hero ── */
+		.cap-hero {
+			background: linear-gradient(180deg, #050505 0%, #0a0a0c 100%);
+			color: white;
+			padding: 80px 0 72px;
+			border-bottom: 1px solid rgba(255,255,255,0.06);
+		}
+
+		.cap-hero .eyebrow {
+			font-size: 0.72rem;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.18em;
+			color: rgba(255,255,255,0.4);
+			margin-bottom: 20px;
+		}
+
+		.cap-hero h1 {
+			font-family: "Cormorant Garamond", serif;
+			font-size: clamp(2.8rem, 5.5vw, 5rem);
+			line-height: 0.96;
+			letter-spacing: -0.03em;
+			margin: 0 0 24px;
+			max-width: 16ch;
+		}
+
+		.cap-hero p {
+			max-width: 62ch;
+			color: rgba(255,255,255,0.56);
+			font-size: 1rem;
+			line-height: 1.85;
+			margin: 0;
+		}
+
+		/* ── Section base ── */
+		.section { padding: 72px 0; }
+		.section.dark {
+			background: linear-gradient(180deg, #060606, #090909);
+			color: #f6f2e8;
+		}
+		.section.mid {
+			background: #f0ece3;
+		}
+
+		.section-label {
+			font-size: 0.7rem;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.2em;
+			color: var(--muted);
+			margin-bottom: 8px;
+		}
+		.dark .section-label { color: rgba(255,255,255,0.35); }
+
+		.section-title {
+			font-family: "Cormorant Garamond", serif;
+			font-size: clamp(2rem, 3.8vw, 3.4rem);
+			line-height: 0.97;
+			letter-spacing: -0.03em;
+			margin: 0 0 14px;
+		}
+
+		.section-lead {
+			max-width: 64ch;
+			color: var(--muted);
+			line-height: 1.82;
+			margin: 0 0 44px;
+			font-size: 0.97rem;
+		}
+		.dark .section-lead { color: rgba(255,255,255,0.55); }
+
+		/* ── Capability cards grid ── */
+		.cap-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 2px;
+			background: var(--line);
+			border: 1px solid var(--line);
+			border-radius: 24px;
+			overflow: hidden;
+		}
+
+		.cap-card {
+			background: white;
+			padding: 36px 32px 32px;
+			display: flex;
+			flex-direction: column;
+			gap: 20px;
+		}
+
+		.cap-card.wide {
+			grid-column: span 2;
+		}
+
+		.cap-card.dark-card {
+			background: #0a0a0c;
+			color: #f6f2e8;
+		}
+
+		.cap-card-label {
+			font-size: 0.68rem;
+			font-weight: 700;
+			letter-spacing: 0.18em;
+			text-transform: uppercase;
+			color: var(--muted);
+			padding: 5px 10px;
+			border: 1px solid var(--line);
+			border-radius: 999px;
+			display: inline-flex;
+			width: fit-content;
+		}
+
+		.dark-card .cap-card-label {
+			color: rgba(255,255,255,0.35);
+			border-color: rgba(255,255,255,0.12);
+		}
+
+		.cap-card h3 {
+			font-size: 1.35rem;
+			font-weight: 700;
+			margin: 0;
+			line-height: 1.2;
+		}
+
+		.cap-card p {
+			margin: 0;
+			color: var(--muted);
+			font-size: 0.9rem;
+			line-height: 1.75;
+		}
+
+		.dark-card p { color: rgba(255,255,255,0.5); }
+
+		.cap-list {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
+
+		.cap-list li {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			font-size: 0.88rem;
+			color: var(--muted);
+			line-height: 1.5;
+		}
+
+		.dark-card .cap-list li { color: rgba(255,255,255,0.55); }
+
+		.cap-list li::before {
+			content: "";
+			width: 5px;
+			height: 5px;
+			border-radius: 50%;
+			background: var(--muted);
+			flex-shrink: 0;
+		}
+
+		.dark-card .cap-list li::before { background: rgba(255,255,255,0.3); }
+
+		/* ── Stat badges ── */
+		.stat-row {
+			display: flex;
+			gap: 24px;
+			flex-wrap: wrap;
+		}
+
+		.stat-badge {
+			display: flex;
+			flex-direction: column;
+			gap: 2px;
+		}
+
+		.stat-badge strong {
+			font-size: 2rem;
+			font-weight: 400;
+			letter-spacing: -0.03em;
+			line-height: 1;
+		}
+
+		.stat-badge span {
+			font-size: 0.75rem;
+			color: rgba(255,255,255,0.4);
+			text-transform: uppercase;
+			letter-spacing: 0.1em;
+		}
+
+		.badge-live {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 4px 10px;
+			border-radius: 999px;
+			font-size: 0.7rem;
+			font-weight: 700;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+		}
+
+		.badge-live.green {
+			background: rgba(42, 170, 79, 0.15);
+			color: #2aaa4f;
+			border: 1px solid rgba(42,170,79,0.25);
+		}
+
+		.badge-live.green::before {
+			content: "";
+			width: 6px;
+			height: 6px;
+			border-radius: 50%;
+			background: #2aaa4f;
+			animation: pulse 1.6s ease infinite;
+		}
+
+		@keyframes pulse {
+			0%, 100% { opacity: 1; }
+			50% { opacity: 0.3; }
+		}
+
+		.badge-acc {
+			font-size: 2.2rem;
+			font-weight: 400;
+			color: white;
+			letter-spacing: -0.03em;
+		}
+
+		/* ── Interior Design section ── */
+		.id-grid {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 18px;
+			margin-top: 32px;
+		}
+
+		.id-block {
+			background: rgba(255,255,255,0.04);
+			border: 1px solid rgba(255,255,255,0.08);
+			border-radius: var(--radius);
+			padding: 28px 26px;
+		}
+
+		.id-block h4 {
+			font-size: 1rem;
+			font-weight: 700;
+			margin: 0 0 14px;
+			color: white;
+		}
+
+		.id-block ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			gap: 7px;
+		}
+
+		.id-block ul li {
+			font-size: 0.86rem;
+			color: rgba(255,255,255,0.5);
+			padding-left: 14px;
+			position: relative;
+			line-height: 1.5;
+		}
+
+		.id-block ul li::before {
+			content: "—";
+			position: absolute;
+			left: 0;
+			color: rgba(255,255,255,0.2);
+			font-size: 0.7rem;
+		}
+
+		/* ── Support / Engagement ── */
+		.support-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 18px;
+			margin-top: 32px;
+		}
+
+		.support-card {
+			border: 1px solid var(--line);
+			border-radius: var(--radius);
+			padding: 28px 24px;
+			background: white;
+		}
+
+		.support-card h4 {
+			font-size: 1.05rem;
+			font-weight: 700;
+			margin: 0 0 10px;
+		}
+
+		.support-card p {
+			font-size: 0.87rem;
+			color: var(--muted);
+			line-height: 1.7;
+			margin: 0 0 16px;
+		}
+
+		.tag-row {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 7px;
+		}
+
+		.tag {
+			font-size: 0.7rem;
+			font-weight: 600;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			padding: 4px 10px;
+			border-radius: 999px;
+			border: 1px solid var(--line);
+			color: var(--muted);
+		}
+
+		/* ── Program Verticals ── */
+		.program-list {
+			display: flex;
+			flex-direction: column;
+			gap: 0;
+			border: 1px solid var(--line);
+			border-radius: var(--radius);
+			overflow: hidden;
+			margin-top: 32px;
+		}
+
+		.program-item {
+			display: flex;
+			align-items: center;
+			gap: 24px;
+			padding: 22px 28px;
+			border-bottom: 1px solid var(--line);
+			background: white;
+			transition: background 160ms ease;
+		}
+
+		.program-item:last-child { border-bottom: none; }
+		.program-item:hover { background: #faf8f4; }
+
+		.program-num {
+			font-size: 0.75rem;
+			font-weight: 700;
+			color: var(--muted);
+			letter-spacing: 0.1em;
+			min-width: 28px;
+		}
+
+		.program-name {
+			font-size: 1rem;
+			font-weight: 600;
+		}
+
+		.program-arrow {
+			margin-left: auto;
+			font-size: 1.1rem;
+			color: var(--muted);
+			opacity: 0.5;
+		}
+
+		/* ── Track record ── */
+		.track-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 14px;
+			margin-top: 32px;
+		}
+
+		.track-item {
+			padding: 20px 22px;
+			border-radius: var(--radius);
+			border: 1px solid rgba(255,255,255,0.08);
+			background: rgba(255,255,255,0.04);
+			font-size: 0.9rem;
+			color: rgba(255,255,255,0.7);
+			line-height: 1.5;
+		}
+
+		/* ── QA / Compliance ── */
+		.qa-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 18px;
+			margin-top: 32px;
+		}
+
+		.qa-card {
+			padding: 28px 24px;
+			border-radius: var(--radius);
+			border: 1px solid var(--line);
+			background: white;
+			font-size: 0.9rem;
+			color: var(--muted);
+			line-height: 1.7;
+		}
+
+		/* ── Whitepaper cards ── */
+		.wp-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 18px;
+			margin-top: 32px;
+		}
+
+		.wp-card {
+			border: 1px solid var(--line);
+			border-radius: var(--radius);
+			overflow: hidden;
+			background: white;
+		}
+
+		.wp-color {
+			height: 6px;
+		}
+
+		.wp-body {
+			padding: 22px 22px 20px;
+		}
+
+		.wp-body h4 {
+			font-size: 0.97rem;
+			font-weight: 700;
+			margin: 0 0 8px;
+			line-height: 1.35;
+		}
+
+		.wp-body p {
+			font-size: 0.84rem;
+			color: var(--muted);
+			line-height: 1.65;
+			margin: 0 0 18px;
+		}
+
+		.wp-download {
+			display: inline-flex;
+			align-items: center;
+			gap: 7px;
+			font-size: 0.8rem;
+			font-weight: 700;
+			color: var(--accent);
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+		}
+
+		/* ── CTA banner ── */
+		.cta-banner {
+			background: linear-gradient(135deg, #0a0a0c, #131318);
+			border: 1px solid rgba(255,255,255,0.08);
+			border-radius: 28px;
+			padding: 52px 48px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 32px;
+			flex-wrap: wrap;
+			margin-top: 56px;
+		}
+
+		.cta-banner h3 {
+			font-family: "Cormorant Garamond", serif;
+			font-size: clamp(1.6rem, 3vw, 2.4rem);
+			color: white;
+			margin: 0 0 8px;
+			letter-spacing: -0.02em;
+		}
+
+		.cta-banner p {
+			margin: 0;
+			color: rgba(255,255,255,0.5);
+			font-size: 0.92rem;
+			max-width: 48ch;
+			line-height: 1.7;
+		}
+
+		/* ── Two col ── */
+		.two-col {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 32px;
+			align-items: start;
+		}
+
+		.three-col {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 18px;
+		}
+
+		/* ── Approach ── */
+		.approach-row {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			margin-top: 20px;
+		}
+
+		.approach-item {
+			display: flex;
+			align-items: baseline;
+			gap: 12px;
+			font-size: 0.9rem;
+		}
+
+		.approach-label {
+			font-weight: 700;
+			white-space: nowrap;
+		}
+
+		.approach-desc {
+			color: rgba(255,255,255,0.45);
+		}
+
+		/* ── Footer ── */
+		.site-footer {
+			padding: 32px 0 20px;
+			background: #070707;
+			color: rgba(255,255,255,0.9);
+			border-top: 1px solid rgba(255,255,255,0.07);
+		}
+
+		.footer-bottom {
+			display: flex;
+			gap: 16px;
+			justify-content: space-between;
+			padding-top: 14px;
+			border-top: 1px solid rgba(255,255,255,0.1);
+			color: rgba(255,255,255,0.4);
+			font-size: 0.82rem;
+			flex-wrap: wrap;
+		}
+
+		/* ── Fade up ── */
+		.fade-up { animation: fadeUp 800ms ease both; }
+		.delay-1 { animation-delay: 100ms; }
+		.delay-2 { animation-delay: 200ms; }
+		.delay-3 { animation-delay: 300ms; }
+
+		@keyframes fadeUp {
+			from { opacity: 0; transform: translateY(20px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+
+		/* ── Responsive ── */
+		@media (max-width: 960px) {
+			.cap-grid, .id-grid, .two-col, .track-grid, .qa-grid, .wp-grid {
+				grid-template-columns: 1fr;
+			}
+			.cap-card.wide { grid-column: span 1; }
+			.support-grid, .three-col { grid-template-columns: 1fr 1fr; }
+		}
+
+		@media (max-width: 640px) {
+			.support-grid, .three-col { grid-template-columns: 1fr; }
+			.cta-banner { flex-direction: column; }
+			.topbar-inner { flex-direction: column; align-items: flex-start; padding: 10px 0; }
+		}
+	</style>
+</head>
+<body>
+
+<header class="topbar">
+	<div class="topbar-inner">
+		<a class="brand" href="index.html">Bluparrot x Safecon</a>
+		<nav class="nav" aria-label="Primary">
+			<a href="about-us.html">About us</a>
+			<a href="#" class="active">Capabilities</a>
+			<a href="leadership.html">Leadership</a>
+			<a href="israel-desk.html">Israel Desk</a>
+			<a href="atmanirbhar.html">Atmanirbhar Bharat</a>
+		</nav>
+		<a class="btn btn-primary" href="contact.html">Contact us</a>
+	</div>
+</header>
+
+<main>
+
+	<!-- ── Hero ── -->
+	<section class="cap-hero">
+		<div class="page">
+			<p class="eyebrow fade-up">Capabilities</p>
+			<h1 class="fade-up delay-1">Strategic Defence Portfolio</h1>
+			<p class="fade-up delay-2">Detailed breakdown of core capabilities. We keep engineering, integration, and supply-chain under one roof where programmes need it — so accountability stays clear and delivery does not fragment.</p>
+		</div>
+	</section>
+
+	<!-- ── Core Capability Cards ── -->
+	<section class="section">
+		<div class="page">
+			<div class="cap-grid fade-up">
+
+				<!-- Manufacturing & Systems Integration -->
+				<div class="cap-card">
+					<div>
+						<div class="cap-card-label">M01_INTEGRATION</div>
+					</div>
+					<h3>Manufacturing &amp; Systems Integration</h3>
+					<ul class="cap-list">
+						<li>Advanced Electronics Fabrication</li>
+						<li>Mechanical Systems Engineering</li>
+						<li>SDR Integration &amp; Testing</li>
+						<li>Naval Equipment Hardening</li>
+						<li>Embedded Systems Architecture</li>
+					</ul>
+				</div>
+
+				<!-- AI for Defence -->
+				<div class="cap-card dark-card">
+					<h3>AI for Defence &amp; Intel</h3>
+					<p>Transforming raw data into operational superiority through advanced analytics.</p>
+					<div style="display:flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+						<div>
+							<div class="badge-acc">98.4%</div>
+							<div style="font-size:0.7rem; color:rgba(255,255,255,0.35); text-transform:uppercase; letter-spacing:0.1em; margin-top:2px;">Satellite Analytics ACC</div>
+						</div>
+						<span class="badge-live green">LIVE — ISR Data Fusion</span>
+					</div>
+					<ul class="cap-list">
+						<li>Satellite Analytics</li>
+						<li>ISR Data Fusion</li>
+					</ul>
+				</div>
+
+				<!-- Project Management -->
+				<div class="cap-card">
+					<h3>Project Management</h3>
+					<p>End-to-end program management and global deployment compliance.</p>
+					<div class="tag-row">
+						<span class="tag">Compliance</span>
+						<span class="tag">Global Logistics</span>
+					</div>
+				</div>
+
+				<!-- Global Supply Chain -->
+				<div class="cap-card dark-card">
+					<h3>Global Supply Chain</h3>
+					<p>Resilient network design and risk-mitigated sourcing for defence-grade hardware components.</p>
+					<div class="stat-row">
+						<div class="stat-badge">
+							<strong>45+</strong>
+							<span>Global Nodes</span>
+						</div>
+						<div class="stat-badge">
+							<strong>0%</strong>
+							<span>Critical Failure</span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<!-- ── Interior Design & Infrastructure ── -->
+	<section class="section dark" id="interior">
+		<div class="page">
+			<div class="section-label">ID01_ENVIRONMENTS</div>
+			<h2 class="section-title fade-up">Interior Design &amp; Infrastructure Development</h2>
+			<p class="section-lead fade-up delay-1">Safecon Blu Parrot offers end-to-end interior design and infrastructure development services for showrooms, warehouses, and factory environments, combining aesthetic excellence with operational efficiency. We design spaces that are visually impactful, functional, scalable, and aligned with modern industrial requirements.</p>
+
+			<div class="id-grid">
+				<div class="id-block">
+					<h4>Showroom Design</h4>
+					<ul>
+						<li>Premium interiors for engineering, manufacturing, industrial, and consumer brands</li>
+						<li>Product display optimisation and customer journey design</li>
+						<li>Integration of digital screens, interactive zones, and branding elements</li>
+						<li>High-end finishes aligned with global brand standards</li>
+					</ul>
+				</div>
+				<div class="id-block">
+					<h4>Warehouse Design</h4>
+					<ul>
+						<li>Layout planning for optimised storage and movement</li>
+						<li>Zoning for inventory, dispatch, and logistics</li>
+						<li>Space utilisation for maximum operational efficiency</li>
+						<li>Integration with supply chain and workflow systems</li>
+					</ul>
+				</div>
+				<div class="id-block">
+					<h4>Factory &amp; Industrial Interiors</h4>
+					<ul>
+						<li>Functional design for manufacturing units and assembly lines</li>
+						<li>Workflow-driven layouts to improve productivity</li>
+						<li>Safety-compliant infrastructure design</li>
+						<li>Integration with engineering systems and equipment setup</li>
+					</ul>
+				</div>
+				<div class="id-block">
+					<h4>Turnkey Execution</h4>
+					<ul>
+						<li>Concept design to final execution</li>
+						<li>Vendor management and procurement</li>
+						<li>Civil, electrical, and finishing work</li>
+						<li>Project timelines and quality control</li>
+					</ul>
+				</div>
+			</div>
+
+			<div style="margin-top: 40px;">
+				<div class="section-label" style="margin-bottom: 18px;">Our Approach</div>
+				<div class="approach-row">
+					<div class="approach-item">
+						<span class="approach-label">Design Thinking</span>
+						<span class="approach-desc">→ Aesthetic + Brand Alignment</span>
+					</div>
+					<div class="approach-item">
+						<span class="approach-label">Engineering Mindset</span>
+						<span class="approach-desc">→ Efficiency + Functionality</span>
+					</div>
+					<div class="approach-item">
+						<span class="approach-label">Execution Excellence</span>
+						<span class="approach-desc">→ Timely Delivery + Quality</span>
+					</div>
+				</div>
+			</div>
+
+			<div style="margin-top: 40px;">
+				<div class="section-label" style="margin-bottom: 14px;">Where We Add Value</div>
+				<div class="tag-row">
+					<span style="font-size:0.85rem; color:rgba(255,255,255,0.5); padding: 8px 16px; border:1px solid rgba(255,255,255,0.1); border-radius:999px;">Industrial manufacturing units</span>
+					<span style="font-size:0.85rem; color:rgba(255,255,255,0.5); padding: 8px 16px; border:1px solid rgba(255,255,255,0.1); border-radius:999px;">Commercial showrooms &amp; experience centres</span>
+					<span style="font-size:0.85rem; color:rgba(255,255,255,0.5); padding: 8px 16px; border:1px solid rgba(255,255,255,0.1); border-radius:999px;">Warehousing &amp; logistics hubs</span>
+					<span style="font-size:0.85rem; color:rgba(255,255,255,0.5); padding: 8px 16px; border:1px solid rgba(255,255,255,0.1); border-radius:999px;">Large-scale operational facilities</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── Support Models & Training ── -->
+	<section class="section mid" id="support">
+		<div class="page">
+			<div class="section-label">Engagement &amp; Readiness</div>
+			<h2 class="section-title fade-up">Support Models &amp; Training</h2>
+			<p class="section-lead fade-up delay-1">Flexible deployment options and specialised programmes designed for mission-critical readiness.</p>
+
+			<div class="support-grid">
+				<div class="support-card">
+					<h4>Onbase (Onsite)</h4>
+					<p>Direct personnel integration within secure facilities for real-time mission support, field engineering, and system adjustments.</p>
+					<div class="tag-row">
+						<span class="tag">Field Support</span>
+						<span class="tag">Installation</span>
+						<span class="tag">Testing</span>
+					</div>
+				</div>
+				<div class="support-card">
+					<h4>Offbase (Offshore)</h4>
+					<p>Secure, remote technical support centres handling maintenance cycles, AI model upgrades, and multi-source data processing.</p>
+					<div class="tag-row">
+						<span class="tag">Remote Diagnostics</span>
+						<span class="tag">AI Upgrades</span>
+					</div>
+				</div>
+				<div class="support-card">
+					<h4>Specialised Training</h4>
+					<p>SDR integration, tactical radio operations and spectral analysis training for field operators.</p>
+					<div class="tag-row">
+						<span class="tag">SDR Integration</span>
+						<span class="tag">AI Applications</span>
+						<span class="tag">Operational Readiness</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── Program Verticals ── -->
+	<section class="section" id="programs">
+		<div class="page two-col" style="align-items: start;">
+			<div>
+				<div class="section-label">Program Verticals</div>
+				<h2 class="section-title fade-up">Key Programs &amp; Expertise</h2>
+				<p class="section-lead fade-up delay-1" style="margin-bottom: 0;">Proven execution across high-stakes defence verticals and mission-critical deployments.</p>
+			</div>
+			<div class="program-list fade-up delay-1">
+				<div class="program-item">
+					<span class="program-num">01</span>
+					<span class="program-name">SCA 2.2.2 Programs</span>
+					<span class="program-arrow">↗</span>
+				</div>
+				<div class="program-item">
+					<span class="program-num">02</span>
+					<span class="program-name">SDR Integration</span>
+					<span class="program-arrow">↗</span>
+				</div>
+				<div class="program-item">
+					<span class="program-num">03</span>
+					<span class="program-name">Slip Ring Systems</span>
+					<span class="program-arrow">↗</span>
+				</div>
+				<div class="program-item">
+					<span class="program-num">04</span>
+					<span class="program-name">Naval &amp; Maritime Systems</span>
+					<span class="program-arrow">↗</span>
+				</div>
+				<div class="program-item">
+					<span class="program-num">05</span>
+					<span class="program-name">High Altitude Deployments</span>
+					<span class="program-arrow">↗</span>
+				</div>
+				<div class="program-item">
+					<span class="program-num">06</span>
+					<span class="program-name">Defence Electronics &amp; Communication Systems</span>
+					<span class="program-arrow">↗</span>
+				</div>
+				<div class="program-item">
+					<span class="program-num">07</span>
+					<span class="program-name">Data Science and AI</span>
+					<span class="program-arrow">↗</span>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── Track Record ── -->
+	<section class="section dark" id="track">
+		<div class="page">
+			<div class="section-label">Track Record</div>
+			<h2 class="section-title fade-up">Projects &amp; Experience</h2>
+			<p class="section-lead fade-up delay-1">Our portfolio spans diverse defence environments and operational theatres.</p>
+			<div class="track-grid fade-up delay-1">
+				<div class="track-item">Naval systems &amp; maritime platforms</div>
+				<div class="track-item">High-altitude operational deployments</div>
+				<div class="track-item">Slip ring manufacturing &amp; integration</div>
+				<div class="track-item">Lifeboat and safety systems</div>
+				<div class="track-item">AI-powered intelligence platforms</div>
+				<div class="track-item">OSINT (Open Source Intelligence)</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── Quality Assurance ── -->
+	<section class="section mid" id="qa">
+		<div class="page">
+			<div class="section-label">Quality Assurance</div>
+			<h2 class="section-title fade-up">Certifications &amp; Compliance</h2>
+			<div class="qa-grid fade-up delay-1">
+				<div class="qa-card">Defence-grade quality standards maintained across all manufacturing and integration programmes.</div>
+				<div class="qa-card">Compliance with global and Indian defence regulations, ensuring every deployment meets statutory requirements.</div>
+				<div class="qa-card">Proven execution frameworks for sensitive projects, with full audit trail and documentation.</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- ── Knowledge Base ── -->
+	<section class="section" id="knowledge">
+		<div class="page">
+			<div class="section-label">Knowledge Base</div>
+			<h2 class="section-title fade-up">Whitepapers &amp; Insights</h2>
+			<p class="section-lead fade-up delay-1">Notes from programmes we have run — integration, AI, and procurement — not generic market commentary.</p>
+
+			<div class="wp-grid fade-up delay-1">
+				<div class="wp-card">
+					<div class="wp-body">
+						<h4>AI in Defence &amp; Applied Intelligence</h4>
+						<p>Case study on Col Lamba use case of arms testing</p>
+						<a href="#" class="wp-download">↓ Download</a>
+					</div>
+				</div>
+				<div class="wp-card">
+					<div class="wp-body">
+						<h4>AI in Defence &amp; Surveillance</h4>
+						<p>Comprehensive analysis of AI applications in modern defence</p>
+						<a href="#" class="wp-download">↓ Download</a>
+					</div>
+				</div>
+				<div class="wp-card">
+					<div class="wp-body">
+						<h4>SDR &amp; Communication Systems</h4>
+						<p>Technical whitepaper on Software Defined Radio integration</p>
+						<a href="#" class="wp-download">↓ Download</a>
+					</div>
+				</div>
+				<div class="wp-card">
+					<div class="wp-body">
+						<h4>Integration Architectures</h4>
+						<p>Best practices for defence systems integration</p>
+						<a href="#" class="wp-download">↓ Download</a>
+					</div>
+				</div>
+				<div class="wp-card">
+					<div class="wp-body">
+						<h4>Future of Defence Manufacturing</h4>
+						<p>Strategic insights on indigenisation and Make in India</p>
+						<a href="#" class="wp-download">↓ Download</a>
+					</div>
+				</div>
+				<div class="wp-card">
+					<div class="wp-body">
+						<h4>Training and Capability Development</h4>
+						<p>Framework for defence capability building</p>
+						<a href="#" class="wp-download">↓ Download</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- CTA -->
+			<div class="cta-banner fade-up delay-2">
+				<div>
+					<h3>Need a module brief or SOW language?</h3>
+					<p>Tell us the programme, security context, and interfaces — we will point you to the right team and artefacts.</p>
+				</div>
+				<a class="btn btn-primary" href="index.html#contact">Request Module Briefing</a>
+			</div>
+		</div>
+	</section>
+
+</main>
+
+<footer class="site-footer">
+	<div class="page" style="padding-bottom: 20px; color: rgba(255,255,255,0.7); font-size: 0.92rem;">
+		<div class="brand" style="color: rgba(255,255,255,0.9); margin-bottom: 8px;">Bluparrot x Safecon</div>
+		Integrated defence capabilities powered by AI, engineering, and execution.
+	</div>
+	<div class="page footer-bottom">
+		<span>© 2026 Safecon Blu Parrot. All rights reserved.</span>
+		<span>Privacy Policy</span>
+		<span>Terms of Service</span>
+	</div>
+</footer>
+
+</body>
+</html>
