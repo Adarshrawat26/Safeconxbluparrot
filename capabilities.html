@@ -84,6 +84,30 @@
 		}
 
 		.nav a:hover, .nav a.active { opacity: 1; }
+		.menu-toggle {
+			display: none;
+			width: 42px;
+			height: 42px;
+			border-radius: 10px;
+			border: 1px solid rgba(255,255,255,0.2);
+			background: #101219;
+			color: white;
+			align-items: center;
+			justify-content: center;
+			gap: 4px;
+			padding: 0;
+			cursor: pointer;
+		}
+		.menu-toggle span {
+			display: block;
+			width: 18px;
+			height: 2px;
+			background: rgba(255,255,255,0.9);
+			transition: transform 180ms ease, opacity 180ms ease;
+		}
+		.mobile-menu { display: none; }
+		.mobile-menu a,
+		.mobile-menu .btn { display: block; width: 100%; }
 
 		.btn {
 			display: inline-flex;
@@ -679,7 +703,60 @@
 		@media (max-width: 640px) {
 			.support-grid, .three-col { grid-template-columns: 1fr; }
 			.cta-banner { flex-direction: column; }
-			.topbar-inner { flex-direction: column; align-items: flex-start; padding: 10px 0; }
+			.topbar-inner {
+				padding: 10px 0;
+				align-items: center;
+				flex-direction: row;
+				justify-content: space-between;
+			}
+			.nav,
+			.topbar-inner > .btn { display: none; }
+			.menu-toggle {
+				display: inline-flex;
+				flex-direction: column;
+			}
+			.mobile-menu {
+				display: block;
+				position: fixed;
+				top: 64px;
+				left: 0;
+				right: 0;
+				background: #090b12;
+				border-top: 1px solid rgba(255,255,255,0.1);
+				border-bottom: 1px solid rgba(255,255,255,0.1);
+				padding: 16px 14px 18px;
+				z-index: 40;
+				opacity: 0;
+				visibility: hidden;
+				pointer-events: none;
+				transform: translateY(-14px);
+				transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+			}
+			.mobile-menu.is-open {
+				opacity: 1;
+				visibility: visible;
+				pointer-events: auto;
+				transform: translateY(0);
+			}
+			.mobile-menu-inner {
+				width: min(100% - 8px, 1200px);
+				margin: 0 auto;
+				display: grid;
+				gap: 8px;
+			}
+			.mobile-menu a {
+				padding: 10px 8px;
+				font-size: 1rem;
+				color: rgba(255,255,255,0.9);
+				border-bottom: 1px solid rgba(255,255,255,0.08);
+			}
+			.mobile-menu .btn {
+				margin-top: 10px;
+				text-align: center;
+			}
+			.menu-open .menu-toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+			.menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
+			.menu-open .menu-toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 		}
 	</style>
 </head>
@@ -688,6 +765,11 @@
 <header class="topbar">
 	<div class="topbar-inner">
 		<a class="brand" href="index.html">Bluparrot x Safecon</a>
+		<button class="menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav">
+			<span></span>
+			<span></span>
+			<span></span>
+		</button>
 		<nav class="nav" aria-label="Primary">
 			<a href="about-us.html">About us</a>
 			<a href="#" class="active">Capabilities</a>
@@ -696,6 +778,16 @@
 			<a href="atmanirbhar.html">Atmanirbhar Bharat</a>
 		</nav>
 		<a class="btn btn-primary" href="contact.html">Contact us</a>
+	</div>
+	<div class="mobile-menu" id="mobile-nav">
+		<div class="mobile-menu-inner">
+			<a href="about-us.html">About us</a>
+			<a href="#" class="active">Capabilities</a>
+			<a href="leadership.html">Leadership</a>
+			<a href="israel-desk.html">Israel Desk</a>
+			<a href="atmanirbhar.html">Atmanirbhar Bharat</a>
+			<a class="btn btn-primary" href="contact.html">Contact us</a>
+		</div>
 	</div>
 </header>
 
@@ -1045,6 +1137,42 @@
 		<span>Terms of Service</span>
 	</div>
 </footer>
+
+<script>
+	(function () {
+		var toggle = document.querySelector('.menu-toggle');
+		var menu = document.getElementById('mobile-nav');
+		if (!toggle || !menu) return;
+
+		var closeMenu = function () {
+			menu.classList.remove('is-open');
+			document.body.classList.remove('menu-open');
+			toggle.setAttribute('aria-expanded', 'false');
+		};
+
+		var openMenu = function () {
+			menu.classList.add('is-open');
+			document.body.classList.add('menu-open');
+			toggle.setAttribute('aria-expanded', 'true');
+		};
+
+		toggle.addEventListener('click', function () {
+			if (menu.classList.contains('is-open')) {
+				closeMenu();
+			} else {
+				openMenu();
+			}
+		});
+
+		menu.querySelectorAll('a').forEach(function (link) {
+			link.addEventListener('click', closeMenu);
+		});
+
+		document.addEventListener('keydown', function (event) {
+			if (event.key === 'Escape') closeMenu();
+		});
+	})();
+</script>
 
 </body>
 </html>
